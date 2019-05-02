@@ -27,7 +27,7 @@ public class QuestionOverviewPane extends GridPane {
         TableColumn nameCol = new TableColumn<>("Question");
         nameCol.setCellValueFactory(new PropertyValueFactory<>("question"));
         table.getColumns().add(nameCol);
-        TableColumn descriptionCol = new TableColumn<>("Category");
+        TableColumn descriptionCol = new TableColumn<>("MainCategory");
         descriptionCol.setCellValueFactory(new PropertyValueFactory("category"));
         table.getColumns().add(descriptionCol);
 		this.add(table, 0, 1, 2, 6);

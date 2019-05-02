@@ -30,7 +30,7 @@ public class CategoryDetailPane extends GridPane {
 		descriptionField = new TextField();
 		this.add(descriptionField, 1, 1, 1, 1);
 
-		this.add(new Label("Main Category:"), 0, 2, 1, 1);
+		this.add(new Label("Main MainCategory:"), 0, 2, 1, 1);
 		categoryField = new ComboBox<>();
 		this.add(categoryField, 1, 2, 1, 1);
 
