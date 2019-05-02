@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public abstract class Category {
+public class Category {
     protected String name, description;
 
     public Category(String name, String description) {
