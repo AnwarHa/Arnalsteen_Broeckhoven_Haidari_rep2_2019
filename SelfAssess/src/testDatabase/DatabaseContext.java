@@ -1,5 +1,7 @@
 package testDatabase;
 
+import java.util.List;
+
 public class DatabaseContext {
     private  DatabaseStrategy dbStrategy;
 
@@ -17,5 +19,9 @@ public class DatabaseContext {
 
     public void writeData(Object data){
         dbStrategy.writeData(data);
+    }
+
+    public List<String> readData(){
+        return (List<String>) dbStrategy.readData();
     }
 }

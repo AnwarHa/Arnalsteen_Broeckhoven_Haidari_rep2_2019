@@ -1,5 +1,7 @@
 package testDatabase;
 
+import java.util.List;
+
 public class DatabaseService {
     private DatabaseContext databaseContext;
 
@@ -7,4 +9,7 @@ public class DatabaseService {
         this.databaseContext = databaseContext;
     }
 
+    public List<String> getAll(){
+        return databaseContext.readData();
+    }
 }

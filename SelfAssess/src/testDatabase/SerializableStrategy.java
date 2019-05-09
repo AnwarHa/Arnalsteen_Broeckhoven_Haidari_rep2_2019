@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,7 +28,7 @@ public abstract class SerializableStrategy implements DatabaseStrategy {
         }
     }
 
-    public Object readData() {
+    public List<String> readData() {
         Object o = null;
         try {
 
@@ -41,6 +42,6 @@ public abstract class SerializableStrategy implements DatabaseStrategy {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return o;
+        return (List<String>) o;
     }
 }
