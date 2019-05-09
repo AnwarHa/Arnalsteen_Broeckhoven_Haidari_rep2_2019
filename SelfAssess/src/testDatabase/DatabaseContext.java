@@ -5,6 +5,7 @@ import java.util.List;
 public class DatabaseContext {
     private  DatabaseStrategy dbStrategy;
 
+
     public DatabaseContext(DatabaseStrategy dbStrategy){
         setDbStrategy(dbStrategy);
     }

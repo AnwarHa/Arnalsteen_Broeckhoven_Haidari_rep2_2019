@@ -12,8 +12,11 @@ import java.util.Map;
  */
 public abstract class SerializableStrategy implements DatabaseStrategy {
     protected String path;
+
     public SerializableStrategy() {
     }
+
+
 
     public void writeData(Object o) {
         try {
@@ -28,7 +31,7 @@ public abstract class SerializableStrategy implements DatabaseStrategy {
         }
     }
 
-    public List<String> readData() {
+    public Object readData() {
         Object o = null;
         try {
 
@@ -42,6 +45,6 @@ public abstract class SerializableStrategy implements DatabaseStrategy {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return (List<String>) o;
+        return o;
     }
 }
