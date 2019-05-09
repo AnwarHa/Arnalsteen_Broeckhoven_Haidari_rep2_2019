@@ -13,7 +13,7 @@ public class QuestionController {
         dbService = new DatabaseService(new DatabaseContext(new SerializableQuestionDatabase()));
     }
 
-    public List<String> getShuffledQuestions(){
+    public List<String> getShuffledStatements(){
         List<String>shuffled = dbService.getAll();
         Collections.shuffle(shuffled);
         return shuffled;
