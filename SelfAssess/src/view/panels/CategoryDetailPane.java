@@ -8,13 +8,18 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import testDatabase.DatabaseContext;
+import testDatabase.DatabaseService;
+import testDatabase.SerializableCategoryDatabase;
 
 public class CategoryDetailPane extends GridPane {
 	private Button btnOK, btnCancel;
 	private TextField titleField, descriptionField;
 	private ComboBox categoryField;
+	private DatabaseService databaseService;
 
 	public CategoryDetailPane() {
+		databaseService = new DatabaseService(new DatabaseContext(new SerializableCategoryDatabase()));
 		this.setPrefHeight(150);
 		this.setPrefWidth(300);
 		
@@ -30,8 +35,9 @@ public class CategoryDetailPane extends GridPane {
 		descriptionField = new TextField();
 		this.add(descriptionField, 1, 1, 1, 1);
 
-		this.add(new Label("Main MainCategory:"), 0, 2, 1, 1);
+		this.add(new Label("Category:"), 0, 2, 1, 1);
 		categoryField = new ComboBox<>();
+		categoryField.getItems().addAll(databaseService.getCategoryNamen());
 		this.add(categoryField, 1, 2, 1, 1);
 
 		btnCancel = new Button("Cancel");

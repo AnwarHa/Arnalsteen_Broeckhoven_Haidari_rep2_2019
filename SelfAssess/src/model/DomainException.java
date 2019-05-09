@@ -5,10 +5,4 @@ public class DomainException extends RuntimeException {
         super(message);
     }
 
-    public static class Category extends Category {
-
-        public MainCategory(String name, String description) {
-            super(name, description);
-        }
-    }
 }
