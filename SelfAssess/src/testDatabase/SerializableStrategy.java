@@ -6,12 +6,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Map;
 
-public class SerializableStrategy implements DatabaseStrategy {
-
+/**
+ *
+ */
+public abstract class SerializableStrategy implements DatabaseStrategy {
+    protected String path;
     public SerializableStrategy() {
     }
 
-    public void writeData(Object o, String path) {
+    public void writeData(Object o) {
         try {
             FileOutputStream fileOut = new FileOutputStream(path);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
@@ -24,7 +27,7 @@ public class SerializableStrategy implements DatabaseStrategy {
         }
     }
 
-    public Object readData(String path) {
+    public Object readData() {
         Object o = null;
         try {
 
