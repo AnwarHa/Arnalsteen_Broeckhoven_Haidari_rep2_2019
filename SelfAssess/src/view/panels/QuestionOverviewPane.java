@@ -10,10 +10,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import testDatabase.DatabaseContext;
-import testDatabase.DatabaseService;
-import testDatabase.SerializableCategoryDatabase;
-import testDatabase.SerializableQuestionDatabase;
+import database.questionDatabase.QuestionDatabaseContext;
+import database.DatabaseService;
 
 public class QuestionOverviewPane extends GridPane {
 	private TableView table;
@@ -21,7 +19,7 @@ public class QuestionOverviewPane extends GridPane {
 	private DatabaseService databaseService;
 	
 	public QuestionOverviewPane() {
-		databaseService = new DatabaseService(new DatabaseContext(new SerializableQuestionDatabase()));
+		databaseService = new DatabaseService(new QuestionDatabaseContext(new SerializableQuestionDatabase()));
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);

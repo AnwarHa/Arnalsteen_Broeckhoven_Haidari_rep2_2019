@@ -1,4 +1,4 @@
-package testDatabase;
+package database;
 
 public class DatabaseException extends RuntimeException {
     public DatabaseException(String s) {

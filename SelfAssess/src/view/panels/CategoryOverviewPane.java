@@ -12,9 +12,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import testDatabase.DatabaseContext;
-import testDatabase.DatabaseService;
-import testDatabase.SerializableCategoryDatabase;
+import database.questionDatabase.QuestionDatabaseContext;
+import database.DatabaseService;
 
 
 public class CategoryOverviewPane extends GridPane {
@@ -23,7 +22,7 @@ public class CategoryOverviewPane extends GridPane {
     private DatabaseService databaseService;
 
     public CategoryOverviewPane() {
-        databaseService = new DatabaseService(new DatabaseContext(new SerializableCategoryDatabase()));
+        databaseService = new DatabaseService(new QuestionDatabaseContext(new SerializableCategoryDatabase()));
         this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
