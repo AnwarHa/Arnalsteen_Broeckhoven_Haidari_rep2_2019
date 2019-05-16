@@ -25,4 +25,8 @@ public class Question {
     private void setCategory(Category category) {
         this.category = category;
     }
+
+    public String getDescription(){
+        return category.getDescription();
+    }
 }
