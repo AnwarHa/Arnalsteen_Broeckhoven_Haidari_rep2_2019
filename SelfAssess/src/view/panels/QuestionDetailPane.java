@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.Category;
 import testDatabase.DatabaseContext;
 import testDatabase.DatabaseService;
 import testDatabase.SerializableCategoryDatabase;
@@ -80,6 +81,7 @@ public class QuestionDetailPane extends GridPane {
 		btnOK = new Button("Save");
 		btnOK.isDefaultButton();
 		btnOK.setText("Save");
+		btnOK.setOnAction(new addQuestion());
 		add(btnOK, 1, 11, 2, 1);
 		
 	}
@@ -90,6 +92,20 @@ public class QuestionDetailPane extends GridPane {
 
 	public void setCancelAction(EventHandler<ActionEvent> cancelAction) {
 		btnCancel.setOnAction(cancelAction);
+	}
+
+	class addQuestion implements  EventHandler<ActionEvent>{
+
+		@Override
+		public void handle(ActionEvent event) {
+			String question = questionField.getText();
+
+			String correctAnswer = answers.get(0);
+
+			Category category = questionController.getCategoryByDescription(categoryField.getValue());
+			Category category
+			questionController.addQuestion()
+		}
 	}
 
 	class AddStatementListener implements EventHandler<ActionEvent> {
