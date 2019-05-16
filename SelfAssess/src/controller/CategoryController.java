@@ -1,32 +1,30 @@
 package controller;
 
-<<<<<<< HEAD
-import model.Category;
-import database.questionDatabase.QuestionDatabaseContext;
-import database.DatabaseService;
 
-import java.util.List;
-=======
+
+import database.DatabaseService;
+import database.categoryDatabase.CategoryDatabaseContext;
+import database.categoryDatabase.InMemoryStrategyCategory;
+import database.questionDatabase.InMemoryStrategyQuestion;
+import database.questionDatabase.QuestionDatabaseContext;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Category;
-import testDatabase.DatabaseContext;
-import testDatabase.DatabaseService;
-import testDatabase.InMemoryCategoryDatabase;
 import view.panels.CategoryDetailPane;
 import view.panels.CategoryOverviewPane;
->>>>>>> master
+
+import java.util.List;
+
 
 public class CategoryController {
     private DatabaseService databaseService;
     private CategoryOverviewPane categoryOverviewPane;
     private CategoryDetailPane categoryDetailPane;
 
-<<<<<<< HEAD
     public CategoryController() {
-        databaseService = new DatabaseService(new QuestionDatabaseContext(new InMemoryCategoryQuestionDatabase()));
+        databaseService = new DatabaseService(new QuestionDatabaseContext(new InMemoryStrategyQuestion()),new CategoryDatabaseContext(new InMemoryStrategyCategory()));
         Category math = new Category("Math", "Math again");
     }
 
@@ -34,15 +32,15 @@ public class CategoryController {
         return databaseService.getCategories();
     }
 
-
-=======
     public CategoryController(CategoryOverviewPane categoryOverviewPane, CategoryDetailPane categoryDetailPane) {
-        databaseService = new DatabaseService(new DatabaseContext(new InMemoryCategoryDatabase()));
+        this();
         setCategoryDetailPane(categoryDetailPane);
         setCategoryOverviewPane(categoryOverviewPane);
         // categoryOverviewPane.setNewAction();
     }
-
+    public void saveCategories(List<Category> categories){
+        databaseService.setCategories(categories);
+    }
 
     public void setCategoryDetailPane(CategoryDetailPane categoryDetailPane) {
         this.categoryDetailPane = categoryDetailPane;

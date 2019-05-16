@@ -15,9 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Category;
-import testDatabase.DatabaseContext;
-import testDatabase.DatabaseService;
-import testDatabase.SerializableCategoryDatabase;
 
 import java.util.*;
 
@@ -102,9 +99,11 @@ public class QuestionDetailPane extends GridPane {
 
 			String correctAnswer = answers.get(0);
 
+			//doe dit best via categoryController (Mathieu)
 			Category category = questionController.getCategoryByDescription(categoryField.getValue());
-			Category category
-			questionController.addQuestion()
+
+			//Category category
+			//questionController.addQuestion()
 		}
 	}
 

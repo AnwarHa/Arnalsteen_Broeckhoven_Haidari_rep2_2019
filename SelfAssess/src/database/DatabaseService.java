@@ -17,7 +17,7 @@ public class DatabaseService {
     public DatabaseService(QuestionDatabaseContext q,CategoryDatabaseContext c) {
         setCategoryDatabaseContext(c);
         setQuestionDatabaseContext(q);
-        this.categoryDatabaseContext.readData()
+        this.categoryDatabaseContext.readData();
     }
 
     private void setQuestionDatabaseContext(QuestionDatabaseContext questionDatabaseContext){
@@ -72,11 +72,6 @@ public class DatabaseService {
         }
         return stat;
     }
-
-
-
-
-
 
     public List<Object> getAll() {
         return questionDatabaseContext.readData();

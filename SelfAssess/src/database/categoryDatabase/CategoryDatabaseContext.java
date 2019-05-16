@@ -8,8 +8,8 @@ public class CategoryDatabaseContext {
     private CategoryDatabaseStrategy dbStrategy;
 
 
-    public CategoryDatabaseContext(){
-
+    public CategoryDatabaseContext(CategoryDatabaseStrategy dbStrategy){
+        setCategoryDatabaseStrategy(dbStrategy);
     }
 
     private void setCategoryDatabaseStrategy(CategoryDatabaseStrategy dbStrategy) {
