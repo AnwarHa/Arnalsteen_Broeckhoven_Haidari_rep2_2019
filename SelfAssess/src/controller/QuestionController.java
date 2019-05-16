@@ -20,4 +20,9 @@ public class QuestionController {
         Collections.shuffle(shuffled);
         return shuffled;
     }
+
+    public List<String> getDescription(){
+    return dbService.getCategoryNamen();
+    }
+
 }

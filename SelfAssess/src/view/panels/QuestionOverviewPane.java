@@ -3,6 +3,7 @@ package view.panels;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -10,8 +11,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import database.questionDatabase.QuestionDatabaseContext;
-import database.DatabaseService;
+import javafx.stage.Stage;
+import testDatabase.DatabaseContext;
+import testDatabase.DatabaseService;
+import testDatabase.SerializableCategoryDatabase;
+import testDatabase.SerializableQuestionDatabase;
 
 public class QuestionOverviewPane extends GridPane {
 	private TableView table;
@@ -39,6 +43,17 @@ public class QuestionOverviewPane extends GridPane {
 		
 		btnNew = new Button("New");
 		this.add(btnNew, 0, 11, 1, 1);
+		btnNew.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Stage stage = new Stage();
+				QuestionDetailPane questionDetailPane = new QuestionDetailPane();
+				Scene scene = new Scene(questionDetailPane);
+				stage.setScene(scene);
+				stage.show();
+			}
+		});
+
 	}
 	
 	public void setNewAction(EventHandler<ActionEvent> newAction) {
