@@ -1,12 +1,14 @@
-package testDatabase;
+package database.categoryDatabase;
+
+import database.DatabaseException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class InMemoryStrategy implements DatabaseStrategy {
+public class InMemoryStrategyCategory implements CategoryDatabaseStrategy {
     private List items = new ArrayList();
 
-    public InMemoryStrategy() {
+    public InMemoryStrategyCategory() {
     }
 
     @Override

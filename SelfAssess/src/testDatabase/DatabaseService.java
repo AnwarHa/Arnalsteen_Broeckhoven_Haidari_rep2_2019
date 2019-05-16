@@ -47,5 +47,9 @@ public class DatabaseService {
         return questions;
     }
 
+    public void write(Object o){
+        this.databaseContext.writeData(o);
+    }
+
 
 }

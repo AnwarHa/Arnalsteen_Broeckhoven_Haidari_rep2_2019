@@ -23,7 +23,7 @@ public class QuestionOverviewPane extends GridPane {
 	private DatabaseService databaseService;
 	
 	public QuestionOverviewPane() {
-		databaseService = new DatabaseService(new DatabaseContext(new SerializableQuestionDatabase()));
+		databaseService = new DatabaseService(new QuestionDatabaseContext(new SerializableQuestionDatabase()));
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
