@@ -39,5 +39,13 @@ public class DatabaseService {
         return databaseContext.readData();
     }
 
+    public List<Question> getQuestions(){
+        List<Question> res=new ArrayList<>();
+        for(Question q: questions){
+
+        }
+        return questions;
+    }
+
 
 }
