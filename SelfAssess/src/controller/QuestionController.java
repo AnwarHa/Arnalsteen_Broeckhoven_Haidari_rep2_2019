@@ -10,7 +10,7 @@ public class QuestionController {
     private DatabaseService dbService;
 
     public QuestionController() {
-        dbService = new DatabaseService(new DatabaseContext(new SerializableQuestionDatabase()));
+        dbService = new DatabaseService(new DatabaseContext(new InMemoryQuestionDatabase()));
     }
 
     public List<String> getShuffledStatements(){
