@@ -11,6 +11,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import testDatabase.DatabaseContext;
+import testDatabase.DatabaseService;
+import testDatabase.SerializableCategoryDatabase;
 
 public class QuestionDetailPane extends GridPane {
 	private Button btnOK, btnCancel;
@@ -18,8 +21,10 @@ public class QuestionDetailPane extends GridPane {
 	private TextField questionField, statementField, feedbackField;
 	private Button btnAdd, btnRemove;
 	private ComboBox categoryField;
+	private DatabaseService databaseService;
 
 	public QuestionDetailPane() {
+		databaseService = new DatabaseService(new DatabaseContext(new SerializableCategoryDatabase()));
 		this.setPrefHeight(300);
 		this.setPrefWidth(320);
 		
@@ -53,6 +58,7 @@ public class QuestionDetailPane extends GridPane {
 
 		add(new Label("MainCategory: "), 0, 9, 1, 1);
 		categoryField = new ComboBox();
+		categoryField.getItems().addAll(databaseService.getCategoryNamen());
 		add(categoryField, 1, 9, 2, 1);
 
 		add(new Label("Feedback: "), 0, 10, 1, 1);
@@ -81,6 +87,7 @@ public class QuestionDetailPane extends GridPane {
 	class AddStatementListener implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent e) {
+			
 		}
 	}
 
