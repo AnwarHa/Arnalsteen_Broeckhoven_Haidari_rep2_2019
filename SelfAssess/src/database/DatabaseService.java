@@ -62,10 +62,13 @@ public class DatabaseService {
         return desc;
     }
 
-    public List<String> getQuestionStatements(){
+    public List<String> getQuestionStatements(Question q){
         List<String> stat = new ArrayList<>();
         for(Question c : questions){
-            stat.add(c.);
+            if(c.equals(q)){
+                stat = c.getAnswers();
+                break;
+            }
         }
         return stat;
     }
