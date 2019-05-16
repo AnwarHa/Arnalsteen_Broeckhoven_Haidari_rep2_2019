@@ -11,11 +11,15 @@ public abstract class InMemoryStrategy implements DatabaseStrategy {
 
     @Override
     public void writeData(Object o) {
-
+        if(o instanceof List){
+            items = (List)o;
+        }else{
+            throw new DatabaseException("can not write data: Wrong object");
+        }
     }
 
     @Override
     public Object readData() {
-        return null;
+        return items;
     }
 }

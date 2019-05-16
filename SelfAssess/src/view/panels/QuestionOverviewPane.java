@@ -3,6 +3,7 @@ package view.panels;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -10,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import testDatabase.DatabaseContext;
 import testDatabase.DatabaseService;
 import testDatabase.SerializableCategoryDatabase;
@@ -34,13 +36,24 @@ public class QuestionOverviewPane extends GridPane {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("question"));
         table.getColumns().add(nameCol);
         TableColumn descriptionCol = new TableColumn<>("Category");
-        descriptionCol.setCellValueFactory(new PropertyValueFactory("category"));
+        descriptionCol.setCellValueFactory(new PropertyValueFactory("description"));
         table.getColumns().add(descriptionCol);
 		this.add(table, 0, 1, 2, 6);
 		table.getItems().addAll(databaseService.getQuestions());
 		
 		btnNew = new Button("New");
 		this.add(btnNew, 0, 11, 1, 1);
+		btnNew.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Stage stage = new Stage();
+				QuestionDetailPane questionDetailPane = new QuestionDetailPane();
+				Scene scene = new Scene(questionDetailPane);
+				stage.setScene(scene);
+				stage.show();
+			}
+		});
+
 	}
 	
 	public void setNewAction(EventHandler<ActionEvent> newAction) {
