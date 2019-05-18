@@ -1,10 +1,13 @@
 package application;
 
+import controller.CategoryController;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.Category;
+import model.CategoryModel;
 import view.panels.AssesMainPane;
 import view.panels.CategoryDetailPane;
 import view.panels.CategoryOverviewPane;
@@ -23,6 +26,9 @@ public class Main extends Application {
 
 			CategoryOverviewPane categoryOverviewPanel = new CategoryOverviewPane();
 			CategoryDetailPane categoryDetailPanel = new CategoryDetailPane();
+
+			CategoryModel categoryModel = new CategoryModel();
+			CategoryController categoryController = new CategoryController(categoryOverviewPanel, categoryModel);
 
 			TestPane testPane = new TestPane();
 			MessagePane messagePane = new MessagePane();
