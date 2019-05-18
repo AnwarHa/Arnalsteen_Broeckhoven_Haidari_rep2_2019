@@ -64,7 +64,7 @@ public class QuestionDetailPane extends GridPane {
 
 		add(new Label("MainCategory: "), 0, 9, 1, 1);
 		categoryField = new ComboBox();
-		categoryField.getItems().addAll(questionController.getDescription());
+		// Doe dit in MVC (Anwar) categoryField.getItems().addAll(questionController.getDescription());
 		add(categoryField, 1, 9, 2, 1);
 
 		add(new Label("Feedback: "), 0, 10, 1, 1);
@@ -100,7 +100,7 @@ public class QuestionDetailPane extends GridPane {
 			String correctAnswer = answers.get(0);
 
 			//doe dit best via categoryController (Mathieu)
-			Category category = questionController.getCategoryByDescription(categoryField.getValue());
+			// Category category = questionController.getCategoryByDescription(categoryField.getValue());
 
 			//Category category
 			//questionController.addQuestion()

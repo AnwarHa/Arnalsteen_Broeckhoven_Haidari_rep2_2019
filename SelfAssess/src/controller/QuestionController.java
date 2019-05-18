@@ -16,7 +16,7 @@ public class QuestionController {
 
     public QuestionController() {
         databaseService = new DatabaseService(new QuestionDatabaseContext(new InMemoryStrategyQuestion()),new CategoryDatabaseContext(new InMemoryStrategyCategory()));
-        Question math1 = new Question("1 + 1 = ?", databaseService.getCategories().get(0),"2",new ArrayList<>());
+        // Question math1 = new Question("1 + 1 = ?", databaseService.getCategories().get(0),"2",new ArrayList<>());
     }
 
     public List<String> getShuffledStatements(Question question){

@@ -21,8 +21,8 @@ public class QuestionOverviewPane extends GridPane {
 	private Button btnNew;
 	private QuestionController controller;
 	
-	public QuestionOverviewPane(QuestionController questionController) {
-		this.controller = questionController;
+	public QuestionOverviewPane(/*QuestionController questionController*/) {
+		// this.controller = questionController;
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
@@ -38,7 +38,7 @@ public class QuestionOverviewPane extends GridPane {
         descriptionCol.setCellValueFactory(new PropertyValueFactory("description"));
         table.getColumns().add(descriptionCol);
 		this.add(table, 0, 1, 2, 6);
-		table.getItems().addAll(controller.getQuestions());
+		// table.getItems().addAll(controller.getQuestions());
 		
 		btnNew = new Button("New");
 		this.add(btnNew, 0, 11, 1, 1);

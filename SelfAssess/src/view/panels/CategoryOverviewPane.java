@@ -37,10 +37,13 @@ public class CategoryOverviewPane extends GridPane {
         descriptionCol.setCellValueFactory(new PropertyValueFactory("description"));
         table.getColumns().add(descriptionCol);
         this.add(table, 0, 1, 2, 6);
-        // table.getItems().addAll(databaseService.getCategories());
 
         btnNew = new Button("New");
         this.add(btnNew, 0, 11, 1, 1);
+    }
+
+    public TableView getTable() {
+        return table;
     }
 
     public void setNewAction(EventHandler<ActionEvent> newAction) {
