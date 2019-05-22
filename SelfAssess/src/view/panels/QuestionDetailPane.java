@@ -20,18 +20,12 @@ import java.util.*;
 
 public class QuestionDetailPane extends GridPane {
 	private Button btnOK, btnCancel;
-	private ListView<String> statementsArea;
 	private TextField questionField, statementField, feedbackField;
 	private Button btnAdd, btnRemove;
 	private ComboBox categoryField;
-	private QuestionController questionController;
-	private ObservableList<String> answers;
-	private ObservableList<String> teverwijderen;
+    private ListView<String> statementsArea;
 
 	public QuestionDetailPane() {
-		teverwijderen = FXCollections.observableArrayList();
-		answers = FXCollections.observableArrayList();
-		questionController = new QuestionController();
 		this.setPrefHeight(300);
 		this.setPrefWidth(320);
 		
@@ -54,17 +48,14 @@ public class QuestionDetailPane extends GridPane {
 
 		Pane addRemove = new HBox();
 		btnAdd = new Button("add");
-		btnAdd.setOnAction(new AddStatementListener());
 		addRemove.getChildren().add(btnAdd);
 
 		btnRemove = new Button("remove");
-		btnRemove.setOnAction(new RemoveStatementListener());
 		addRemove.getChildren().add(btnRemove);
 		add(addRemove, 1, 8, 2, 1);
 
-		add(new Label("MainCategory: "), 0, 9, 1, 1);
+		add(new Label("Category: "), 0, 9, 1, 1);
 		categoryField = new ComboBox();
-		// Doe dit in MVC (Anwar) categoryField.getItems().addAll(questionController.getDescription());
 		add(categoryField, 1, 9, 2, 1);
 
 		add(new Label("Feedback: "), 0, 10, 1, 1);
@@ -78,9 +69,45 @@ public class QuestionDetailPane extends GridPane {
 		btnOK = new Button("Save");
 		btnOK.isDefaultButton();
 		btnOK.setText("Save");
-		btnOK.setOnAction(new addQuestion());
 		add(btnOK, 1, 11, 2, 1);
 		
+	}
+
+    public Button getBtnAdd() {
+        return btnAdd;
+    }
+
+    public Button getBtnCancel() {
+        return btnCancel;
+    }
+
+    public Button getBtnOK() {
+        return btnOK;
+    }
+
+    public Button getBtnRemove() {
+        return btnRemove;
+    }
+
+
+    public TextField getQuestionField() {
+		return questionField;
+	}
+
+	public ComboBox getCategoryField() {
+		return categoryField;
+	}
+
+	public ListView<String> getStatementsArea() {
+		return statementsArea;
+	}
+
+	public TextField getFeedbackField() {
+		return feedbackField;
+	}
+
+	public TextField getStatementField() {
+		return statementField;
 	}
 
 	public void setSaveAction(EventHandler<ActionEvent> saveAction) {
@@ -91,45 +118,5 @@ public class QuestionDetailPane extends GridPane {
 		btnCancel.setOnAction(cancelAction);
 	}
 
-	class addQuestion implements  EventHandler<ActionEvent>{
 
-		@Override
-		public void handle(ActionEvent event) {
-			String question = questionField.getText();
-
-			String correctAnswer = answers.get(0);
-
-			//doe dit best via categoryController (Mathieu)
-			// Category category = questionController.getCategoryByDescription(categoryField.getValue());
-
-			//Category category
-			//questionController.addQuestion()
-		}
-	}
-
-	class AddStatementListener implements EventHandler<ActionEvent> {
-		@Override
-		public void handle(ActionEvent e) {
-			answers.add(statementField.getText());
-			statementsArea.setItems(answers);
-			statementField.clear();
-		}
-	}
-
-	class RemoveStatementListener implements EventHandler<ActionEvent> {
-		@Override
-		public void handle(ActionEvent e) {
-			Iterator<String> it = answers.iterator();
-			teverwijderen = statementsArea.getSelectionModel().getSelectedItems();
-			System.out.println(teverwijderen);
-			while(it.hasNext()){
-				String word = it.next();
-				if(word.equals(teverwijderen.get(0))){
-					it.remove();
-					break;
-				}
-			}
-			System.out.println(answers);
-		}
-	}
 }

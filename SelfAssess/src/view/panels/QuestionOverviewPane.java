@@ -19,10 +19,8 @@ import javafx.stage.Stage;
 public class QuestionOverviewPane extends GridPane {
 	private TableView table;
 	private Button btnNew;
-	private QuestionController controller;
 	
-	public QuestionOverviewPane(/*QuestionController questionController*/) {
-		// this.controller = questionController;
+	public QuestionOverviewPane() {
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
@@ -35,26 +33,19 @@ public class QuestionOverviewPane extends GridPane {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("question"));
         table.getColumns().add(nameCol);
         TableColumn descriptionCol = new TableColumn<>("Category");
-        descriptionCol.setCellValueFactory(new PropertyValueFactory("description"));
+        descriptionCol.setCellValueFactory(new PropertyValueFactory("category"));
         table.getColumns().add(descriptionCol);
 		this.add(table, 0, 1, 2, 6);
-		// table.getItems().addAll(controller.getQuestions());
 		
 		btnNew = new Button("New");
 		this.add(btnNew, 0, 11, 1, 1);
-		btnNew.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				Stage stage = new Stage();
-				QuestionDetailPane questionDetailPane = new QuestionDetailPane();
-				Scene scene = new Scene(questionDetailPane);
-				stage.setScene(scene);
-				stage.show();
-			}
-		});
 
 	}
-	
+
+	public TableView getTable() {
+		return table;
+	}
+
 	public void setNewAction(EventHandler<ActionEvent> newAction) {
 		btnNew.setOnAction(newAction);
 	}
