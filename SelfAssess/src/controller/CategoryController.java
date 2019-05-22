@@ -2,10 +2,6 @@ package controller;
 
 
 import database.DatabaseService;
-import database.categoryDatabase.CategoryDatabaseContext;
-import database.categoryDatabase.InMemoryStrategyCategory;
-import database.questionDatabase.InMemoryStrategyQuestion;
-import database.questionDatabase.QuestionDatabaseContext;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;

@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -14,6 +15,7 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 public class MessagePane extends GridPane {
 	private Button testButton;
@@ -27,14 +29,11 @@ public class MessagePane extends GridPane {
         this.setHgap(5);
         
 		testButton = new Button("Evaluate");
-		testButton.setOnAction(new EventHandler<ActionEvent>() { //TODO remove or generalize
-			
-			@Override
-			public void handle(ActionEvent event) {
-			}
-		});
 		add(testButton, 0,1,1,1);
 		setHalignment(testButton, HPos.CENTER);
 	}
 
+	public Button getTestButton() {
+		return testButton;
+	}
 }

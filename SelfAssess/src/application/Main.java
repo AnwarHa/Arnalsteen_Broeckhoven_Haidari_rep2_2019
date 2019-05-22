@@ -2,6 +2,7 @@ package application;
 
 import controller.CategoryController;
 import controller.QuestionController;
+import controller.TestController;
 import database.DatabaseService;
 import database.categoryDatabase.CategoryDatabaseContext;
 import database.categoryDatabase.InMemoryStrategyCategory;
@@ -45,6 +46,8 @@ public class Main extends Application {
 
 			TestPane testPane = new TestPane();
 			MessagePane messagePane = new MessagePane();
+            TestController testController = new TestController(messagePane);
+            testController.setDatabaseService(databaseService);
 
 			Group root = new Group();
 			Scene scene = new Scene(root, 750, 400);
