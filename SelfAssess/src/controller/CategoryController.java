@@ -16,10 +16,6 @@ import model.DomainException;
 import view.panels.CategoryDetailPane;
 import view.panels.CategoryOverviewPane;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class CategoryController {
     private CategoryOverviewPane categoryOverviewPane;
     private CategoryModel categoryModel;
@@ -30,7 +26,6 @@ public class CategoryController {
     public CategoryController(CategoryOverviewPane categoryOverviewPane, CategoryModel categoryModel) {
         this.categoryModel = categoryModel;
         this.categoryOverviewPane = categoryOverviewPane;
-        databaseService = new DatabaseService(new QuestionDatabaseContext(new InMemoryStrategyQuestion()), new CategoryDatabaseContext(new InMemoryStrategyCategory()));
 
         this.categoryOverviewPane.setNewAction(new OpenDetailPane());
 
@@ -41,6 +36,10 @@ public class CategoryController {
         }
 
 
+    }
+
+    public void setDatabaseService(DatabaseService databaseService) {
+        this.databaseService = databaseService;
     }
 
     class OpenDetailPane implements EventHandler<ActionEvent> {

@@ -1,6 +1,7 @@
 package database.categoryDatabase;
 
 import database.DatabaseException;
+import model.Category;
 
 import java.util.ArrayList;
 import java.util.List;

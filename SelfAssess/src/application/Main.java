@@ -1,6 +1,12 @@
 package application;
 
 import controller.CategoryController;
+import controller.QuestionController;
+import database.DatabaseService;
+import database.categoryDatabase.CategoryDatabaseContext;
+import database.categoryDatabase.InMemoryStrategyCategory;
+import database.questionDatabase.InMemoryStrategyQuestion;
+import database.questionDatabase.QuestionDatabaseContext;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -8,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Category;
 import model.CategoryModel;
+import model.QuestionModel;
 import view.panels.AssesMainPane;
 import view.panels.CategoryDetailPane;
 import view.panels.CategoryOverviewPane;
@@ -21,14 +28,20 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		try {
+			DatabaseService databaseService = new DatabaseService(new QuestionDatabaseContext(new InMemoryStrategyQuestion()), new CategoryDatabaseContext(new InMemoryStrategyCategory()));
+
 			QuestionOverviewPane questionOverviewPane = new QuestionOverviewPane();
 			QuestionDetailPane questionDetailPane = new QuestionDetailPane();
 
-			CategoryOverviewPane categoryOverviewPanel = new CategoryOverviewPane();
+			CategoryOverviewPane categoryOverviewPane = new CategoryOverviewPane();
 			CategoryDetailPane categoryDetailPanel = new CategoryDetailPane();
 
 			CategoryModel categoryModel = new CategoryModel();
-			CategoryController categoryController = new CategoryController(categoryOverviewPanel, categoryModel);
+            QuestionModel questionModel = new QuestionModel();
+			CategoryController categoryController = new CategoryController(categoryOverviewPane, categoryModel);
+			categoryController.setDatabaseService(databaseService);
+            QuestionController questionController = new QuestionController(questionOverviewPane, questionModel);
+            questionController.setDatabaseService(databaseService);
 
 			TestPane testPane = new TestPane();
 			MessagePane messagePane = new MessagePane();
@@ -36,7 +49,7 @@ public class Main extends Application {
 			Group root = new Group();
 			Scene scene = new Scene(root, 750, 400);
 
-			BorderPane borderPane = new AssesMainPane(messagePane, categoryOverviewPanel, questionOverviewPane);
+			BorderPane borderPane = new AssesMainPane(messagePane, categoryOverviewPane, questionOverviewPane);
 			borderPane.prefHeightProperty().bind(scene.heightProperty());
 			borderPane.prefWidthProperty().bind(scene.widthProperty());
 

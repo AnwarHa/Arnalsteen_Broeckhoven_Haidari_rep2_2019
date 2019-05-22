@@ -16,6 +16,7 @@ public class DatabaseService {
 
     public DatabaseService(QuestionDatabaseContext q, CategoryDatabaseContext c) {
         categories = new ArrayList<>();
+        questions = new ArrayList<>();
         setCategoryDatabaseContext(c);
         setQuestionDatabaseContext(q);
         this.categoryDatabaseContext.readData();
@@ -27,6 +28,14 @@ public class DatabaseService {
 
     private void setCategoryDatabaseContext(CategoryDatabaseContext categoryDatabaseContext) {
         this.categoryDatabaseContext = categoryDatabaseContext;
+    }
+
+    public CategoryDatabaseContext getCategoryDatabaseContext() {
+        return categoryDatabaseContext;
+    }
+
+    public QuestionDatabaseContext getQuestionDatabaseContext() {
+        return questionDatabaseContext;
     }
 
     public List<Category> getCategories() {
@@ -96,6 +105,15 @@ public class DatabaseService {
             }
         }
         return newList;
+    }
+
+    public Category getCategoryByDescription(String desc) {
+        for(Category category: categories){
+            if(category.getDescription().equalsIgnoreCase(desc)){
+                return category;
+            }
+        }
+        return null;
     }
 }
 
