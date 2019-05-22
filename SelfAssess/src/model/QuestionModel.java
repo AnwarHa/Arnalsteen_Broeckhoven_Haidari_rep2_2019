@@ -1,27 +1,19 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Question {
+public class QuestionModel {
     private String question;
-    private String category;
-    private String correctAnswer;
+    private Category category;
+    private String correctanswer;
     private List<String> answers;
 
-    public Question(String question, String category, String correctAnswer, List<String> answers) {
-        this.answers = answers;
-        setCorrectAnswer(correctAnswer);
-        setQuestion(question);
-        setCategory(category);
-    }
-
     private void setCorrectAnswer(String correctanswer) {
-        this.correctAnswer = correctanswer;
+        this.correctanswer = correctanswer;
     }
 
     private String getCorrectanswer() {
-        return this.correctAnswer;
+        return this.correctanswer;
     }
 
     public String getQuestion() {
@@ -32,7 +24,7 @@ public class Question {
         this.question = question;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
@@ -44,9 +36,11 @@ public class Question {
         this.answers.addAll(answers);
     }
 
-    private void setCategory(String category) {
+    private void setCategory(Category category) {
         this.category = category;
     }
 
-
+    public String getDescription() {
+        return category.getDescription();
+    }
 }
