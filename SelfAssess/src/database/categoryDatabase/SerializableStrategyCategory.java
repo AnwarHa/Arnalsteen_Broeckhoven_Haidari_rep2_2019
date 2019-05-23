@@ -12,7 +12,7 @@ import java.util.List;
  *
  */
 public class SerializableStrategyCategory implements CategoryDatabaseStrategy {
-    protected String path = "database/categoryDatabase/category.txt";
+    protected String path = "/category.txt";
 
     public SerializableStrategyCategory() {
     }

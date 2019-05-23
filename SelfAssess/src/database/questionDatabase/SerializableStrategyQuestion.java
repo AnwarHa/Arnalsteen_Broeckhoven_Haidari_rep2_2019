@@ -12,7 +12,7 @@ import java.util.List;
  *
  */
 public class SerializableStrategyQuestion implements QuestionDatabaseStrategy {
-    protected String path = "database/questionDatabase/question.txt";
+    protected String path = "/question.txt";
 
     public SerializableStrategyQuestion() {
     }

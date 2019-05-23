@@ -1,6 +1,7 @@
 package database.questionDatabase;
 
 import database.DatabaseException;
+import model.Question;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class InMemoryStrategyQuestion implements QuestionDatabaseStrategy {
     }
 
     @Override
-    public Object readData() {
+    public List<Question> readData() {
         return items;
     }
 }

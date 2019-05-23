@@ -39,7 +39,7 @@ public class TestController {
 
             testPane.setStatementGroup(new ToggleGroup());
 
-            Question nextQuestion = databaseService.getQuestions().iterator().next();
+            Question nextQuestion = databaseService.readQuestions().iterator().next();
             testPane.getQuestionField().setText(nextQuestion.getQuestion());
             for (String answer : nextQuestion.getStatements()) {
                 testPane.getvBox().getChildren().addAll(createButton(answer, testPane.getStatementGroup()));

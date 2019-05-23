@@ -69,7 +69,7 @@ public class CategoryController {
                 category = new Category(categoryDetailPane.getCategoryField().getValue().toString(), description);
             }
             categoryOverviewPane.getTable().getItems().addAll(category);
-            databaseService.getCategories().add(category);
+            databaseService.readCategories().add(category);
             stage.close();
         }
     }

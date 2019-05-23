@@ -22,7 +22,7 @@ public class InMemoryStrategyCategory implements CategoryDatabaseStrategy {
     }
 
     @Override
-    public Object readData() {
+    public List<Category> readData() {
         return items;
     }
 }
