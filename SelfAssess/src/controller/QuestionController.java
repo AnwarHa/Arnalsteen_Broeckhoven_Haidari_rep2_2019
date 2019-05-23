@@ -17,7 +17,6 @@ import java.util.List;
 
 public class QuestionController {
     private QuestionOverviewPane questionOverviewPane;
-    private QuestionModel questionModel;
     private QuestionDetailPane questionDetailPane;
     private DatabaseService databaseService;
     private Stage stage;
@@ -26,11 +25,10 @@ public class QuestionController {
     private ObservableList<String> teVerwijderen;
 
 
-    public QuestionController(QuestionOverviewPane questionOverviewPane, QuestionModel questionModel) {
+    public QuestionController(QuestionOverviewPane questionOverviewPane) {
 
 
         this.questionOverviewPane = questionOverviewPane;
-        this.questionModel = questionModel;
         this.questionOverviewPane.setNewAction(new OpenDetailPane());
         new AddStatementListener();
         new RemoveStatementListener();
@@ -115,7 +113,8 @@ public class QuestionController {
             String correctAnswer = answers.get(0);
             String question = questionDetailPane.getQuestionField().getText();
             String category = questionDetailPane.getCategoryField().getValue().toString();
-            Question questionObject = new Question(question, category, correctAnswer, answers);
+            String feedback = questionDetailPane.getFeedbackField().getText();
+            Question questionObject = new Question(question, category, answers, feedback);
             databaseService.getQuestions().add(questionObject);
             questionOverviewPane.getTable().getItems().addAll(questionObject);
             stage.close();

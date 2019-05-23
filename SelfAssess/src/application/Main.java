@@ -39,10 +39,9 @@ public class Main extends Application {
 			CategoryDetailPane categoryDetailPanel = new CategoryDetailPane();
 
 			CategoryModel categoryModel = new CategoryModel();
-            QuestionModel questionModel = new QuestionModel();
 			CategoryController categoryController = new CategoryController(categoryOverviewPane, categoryModel);
 			categoryController.setDatabaseService(databaseService);
-            QuestionController questionController = new QuestionController(questionOverviewPane, questionModel);
+            QuestionController questionController = new QuestionController(questionOverviewPane);
             questionController.setDatabaseService(databaseService);
 
 			TestPane testPane = new TestPane();
