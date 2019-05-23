@@ -7,20 +7,17 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Category;
-import model.CategoryModel;
 import model.DomainException;
 import view.panels.CategoryDetailPane;
 import view.panels.CategoryOverviewPane;
 
 public class CategoryController {
     private CategoryOverviewPane categoryOverviewPane;
-    private CategoryModel categoryModel;
     private CategoryDetailPane categoryDetailPane;
     private DatabaseService databaseService;
     private Stage stage;
 
-    public CategoryController(CategoryOverviewPane categoryOverviewPane, CategoryModel categoryModel) {
-        this.categoryModel = categoryModel;
+    public CategoryController(CategoryOverviewPane categoryOverviewPane) {
         this.categoryOverviewPane = categoryOverviewPane;
 
         this.categoryOverviewPane.setNewAction(new OpenDetailPane());
