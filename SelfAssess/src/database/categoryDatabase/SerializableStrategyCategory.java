@@ -1,15 +1,18 @@
 package database.categoryDatabase;
 
+import model.Category;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.List;
 
 /**
  *
  */
 public class SerializableStrategyCategory implements CategoryDatabaseStrategy {
-    protected String path;
+    protected String path = "database/categoryDatabase/category.txt";
 
     public SerializableStrategyCategory() {
     }
@@ -29,7 +32,7 @@ public class SerializableStrategyCategory implements CategoryDatabaseStrategy {
         }
     }
 
-    public Object readData() {
+    public List<Category> readData() {
         Object o = null;
         try {
 
@@ -43,6 +46,6 @@ public class SerializableStrategyCategory implements CategoryDatabaseStrategy {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return o;
+        return (List<Category>) o;
     }
 }

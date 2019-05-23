@@ -1,6 +1,7 @@
 package database.questionDatabase;
 
 import database.questionDatabase.QuestionDatabaseStrategy;
+import model.Question;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class QuestionDatabaseContext {
         dbStrategy.writeData(data);
     }
 
-    public List<Object> readData(){
-        return (List<Object>) dbStrategy.readData();
+    public List<Question> readData(){
+        return dbStrategy.readData();
     }
 }

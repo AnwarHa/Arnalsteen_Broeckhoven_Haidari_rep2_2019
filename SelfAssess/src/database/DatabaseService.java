@@ -38,33 +38,33 @@ public class DatabaseService {
         return questionDatabaseContext;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    public List<Category> readCategories() {
+        return categoryDatabaseContext.readData();
     }
 
-    public List<Question> getQuestions() {
-        return questions;
+    public List<Question> readQuestions() {
+        return questionDatabaseContext.readData();
     }
 
-    public void setCategories(List<Category> categories) {
+    public void writeCategories(List<Category> categories) {
         if (categories.isEmpty()) {
             throw new DatabaseException("can not set categories: list is empty");
         } else {
-            this.categories = categories;
+            categoryDatabaseContext.writeData(categories);
         }
 
     }
 
-    public void setQuestions(List<Question> questions) {
+    public void writetQuestions(List<Question> questions) {
         if (questions.isEmpty()) {
             throw new DatabaseException("can not set questions: list is empty");
         } else {
-            this.questions = questions;
+           questionDatabaseContext.writeData(questions);
         }
 
     }
 
-    public List<String> getCategoryDescriptions() {
+    /*public List<String> getCategoryDescriptions() {
         List<String> desc = new ArrayList<>();
         for (Category c : categories) {
             desc.add(c.getDescription());
@@ -114,7 +114,7 @@ public class DatabaseService {
             }
         }
         return null;
-    }
+    }*/
 }
 
 

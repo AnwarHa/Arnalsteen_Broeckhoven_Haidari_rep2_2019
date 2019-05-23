@@ -1,6 +1,7 @@
 package database.categoryDatabase;
 
 import database.questionDatabase.QuestionDatabaseStrategy;
+import model.Category;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class CategoryDatabaseContext {
         dbStrategy.writeData(data);
     }
 
-    public List<Object> readData(){
-        return (List<Object>) dbStrategy.readData();
+    public List<Category> readData(){
+        return dbStrategy.readData();
     }
 }
