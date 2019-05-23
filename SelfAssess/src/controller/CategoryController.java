@@ -11,6 +11,9 @@ import model.DomainException;
 import view.panels.CategoryDetailPane;
 import view.panels.CategoryOverviewPane;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CategoryController {
     private CategoryOverviewPane categoryOverviewPane;
     private CategoryDetailPane categoryDetailPane;
@@ -69,6 +72,9 @@ public class CategoryController {
                 category = new Category(categoryDetailPane.getCategoryField().getValue().toString(), description);
             }
             categoryOverviewPane.getTable().getItems().addAll(category);
+            List<Category> categoryList = new ArrayList<>();
+            categoryList.add(category);
+            databaseService.writeCategories(categoryList);
             databaseService.readCategories().add(category);
             stage.close();
         }
