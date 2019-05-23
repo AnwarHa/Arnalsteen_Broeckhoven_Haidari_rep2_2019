@@ -1,9 +1,12 @@
 package database.questionDatabase;
 
+import model.Question;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.List;
 
 /**
  *
@@ -29,7 +32,7 @@ public class SerializableStrategyQuestion implements QuestionDatabaseStrategy {
         }
     }
 
-    public Object readData() {
+    public List<Question> readData() {
         Object o = null;
         try {
 
@@ -43,6 +46,6 @@ public class SerializableStrategyQuestion implements QuestionDatabaseStrategy {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return o;
+        return (List<Question>) o;
     }
 }

@@ -46,7 +46,7 @@ public class QuestionController {
     }
 
     public List<Question> getQuestions() {
-        return databaseService.getQuestions();
+        return databaseService.readQuestions();
     }
 
     public List<String> getDescription() {
@@ -115,7 +115,7 @@ public class QuestionController {
             String category = questionDetailPane.getCategoryField().getValue().toString();
             String feedback = questionDetailPane.getFeedbackField().getText();
             Question questionObject = new Question(question, category, answers, feedback);
-            databaseService.getQuestions().add(questionObject);
+            databaseService.readQuestions().add(questionObject);
             questionOverviewPane.getTable().getItems().addAll(questionObject);
             stage.close();
 

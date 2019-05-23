@@ -11,12 +11,8 @@ import java.util.List;
 public class DatabaseService {
     private QuestionDatabaseContext questionDatabaseContext;
     private CategoryDatabaseContext categoryDatabaseContext;
-    private List<Question> questions;
-    private List<Category> categories;
 
     public DatabaseService(QuestionDatabaseContext q, CategoryDatabaseContext c) {
-        categories = new ArrayList<>();
-        questions = new ArrayList<>();
         setCategoryDatabaseContext(c);
         setQuestionDatabaseContext(q);
         this.categoryDatabaseContext.readData();
@@ -64,9 +60,9 @@ public class DatabaseService {
 
     }
 
-    /*public List<String> getCategoryDescriptions() {
+    public List<String> getCategoryDescriptions() {
         List<String> desc = new ArrayList<>();
-        for (Category c : categories) {
+        for (Category c : readCategories()) {
             desc.add(c.getDescription());
         }
         return desc;
@@ -74,7 +70,7 @@ public class DatabaseService {
 
     public List<String> getCategoryNames() {
         List<String> names = new ArrayList<>();
-        for (Category c : categories) {
+        for (Category c : readCategories()) {
             names.add(c.getName());
         }
         return names;
@@ -82,7 +78,7 @@ public class DatabaseService {
 
     public List<String> getQuestionStatements(Question q) {
         List<String> stat = new ArrayList<>();
-        for (Question c : questions) {
+        for (Question c : readQuestions()) {
             if (c.equals(q)) {
                 stat = c.getStatements();
                 break;
@@ -90,12 +86,6 @@ public class DatabaseService {
         }
         return stat;
     }
-
-
-    public List<Object> getAll() {
-        return questionDatabaseContext.readData();
-    }
-
 
     public ArrayList<String> getCategoryNamesWithoutDuplicates() {
         ArrayList<String> newList = new ArrayList<>();
@@ -108,13 +98,13 @@ public class DatabaseService {
     }
 
     public Category getCategoryByDescription(String desc) {
-        for(Category category: categories){
+        for(Category category: readCategories()){
             if(category.getDescription().equalsIgnoreCase(desc)){
                 return category;
             }
         }
         return null;
-    }*/
+    }
 }
 
 
