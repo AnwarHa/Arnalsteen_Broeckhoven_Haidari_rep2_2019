@@ -13,7 +13,7 @@ public class InMemoryStrategyQuestion implements QuestionDatabaseStrategy {
     }
 
     @Override
-    public void writeData(Object o) {
+    public void writeData(List<Question> o) {
         if(o instanceof List){
             items = (List)o;
         }else{

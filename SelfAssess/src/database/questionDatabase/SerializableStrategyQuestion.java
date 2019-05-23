@@ -19,7 +19,7 @@ public class SerializableStrategyQuestion implements QuestionDatabaseStrategy {
 
 
 
-    public void writeData(Object o) {
+    public void writeData(List<Question> o) {
         try {
             FileOutputStream fileOut = new FileOutputStream(path);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);

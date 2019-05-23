@@ -13,7 +13,7 @@ public class InMemoryStrategyCategory implements CategoryDatabaseStrategy {
     }
 
     @Override
-    public void writeData(Object o) {
+    public void writeData(List<Category> o) {
         if(o instanceof List){
             items = (List)o;
         }else{

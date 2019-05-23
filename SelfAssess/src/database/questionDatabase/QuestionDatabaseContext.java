@@ -21,7 +21,7 @@ public class QuestionDatabaseContext {
         return dbStrategy;
     }
 
-    public void writeData(Object data){
+    public void writeData(List<Question> data){
         dbStrategy.writeData(data);
     }
 

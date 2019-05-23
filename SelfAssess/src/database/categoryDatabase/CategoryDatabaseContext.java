@@ -26,7 +26,7 @@ public class CategoryDatabaseContext {
         return dbStrategy;
     }
 
-    public void writeData(Object data){
+    public void writeData(List<Category> data){
         dbStrategy.writeData(data);
     }
 

@@ -5,6 +5,6 @@ import model.Question;
 import java.util.List;
 
 public interface QuestionDatabaseStrategy {
-    public void writeData(Object o);
+    public void writeData(List<Question> o);
     public List<Question> readData();
 }
