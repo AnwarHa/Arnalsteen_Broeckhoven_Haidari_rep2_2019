@@ -22,7 +22,7 @@ public class SerializableStrategyCategory implements CategoryDatabaseStrategy {
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(o);
             objectOut.close();
-            System.out.println("The "+o.getClass()  +" was succesfully written to a file");
+            System.out.println("The "+o.getClass().getSimpleName()  +" was succesfully written to a file");
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -36,7 +36,7 @@ public class SerializableStrategyCategory implements CategoryDatabaseStrategy {
             FileInputStream fileIn = new FileInputStream(path);
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
             o = objectIn.readObject();
-            System.out.println("The Object has been read from the file");
+            System.out.println(o.getClass().getSimpleName() + " has been read from the file");
             objectIn.close();
 
 

@@ -84,7 +84,7 @@ public class DatabaseService {
         List<String> stat = new ArrayList<>();
         for (Question c : questions) {
             if (c.equals(q)) {
-                stat = c.getAnswers();
+                stat = c.getStatements();
                 break;
             }
         }

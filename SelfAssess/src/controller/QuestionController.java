@@ -1,19 +1,13 @@
 package controller;
 
-import database.categoryDatabase.CategoryDatabaseContext;
-import database.categoryDatabase.InMemoryStrategyCategory;
-import database.questionDatabase.InMemoryStrategyQuestion;
-import database.questionDatabase.QuestionDatabaseContext;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Category;
 import model.Question;
 import database.*;
-import model.QuestionModel;
 import view.panels.QuestionDetailPane;
 import view.panels.QuestionOverviewPane;
 

@@ -28,7 +28,7 @@ public class CategoryController {
         try {
             categoryOverviewPane.getTable().getItems().addAll(databaseService.getCategoryDescriptions());
         }catch (NullPointerException e){
-            System.out.println("No category's yet");
+            System.out.println("No categories yet");
         }
 
 

@@ -6,16 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import model.Question;
 import view.panels.MessagePane;
 import view.panels.TestPane;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class TestController {
     private ObservableList<Boolean> scores;
@@ -46,7 +41,7 @@ public class TestController {
 
             Question nextQuestion = databaseService.getQuestions().iterator().next();
             testPane.getQuestionField().setText(nextQuestion.getQuestion());
-            for (String answer : nextQuestion.getAnswers()) {
+            for (String answer : nextQuestion.getStatements()) {
                 testPane.getvBox().getChildren().addAll(createButton(answer, testPane.getStatementGroup()));
             }
 
