@@ -5,9 +5,7 @@ import controller.QuestionController;
 import controller.TestController;
 import database.DatabaseService;
 import database.categoryDatabase.CategoryDatabaseContext;
-import database.categoryDatabase.InMemoryStrategyCategory;
 import database.categoryDatabase.SerializableStrategyCategory;
-import database.questionDatabase.InMemoryStrategyQuestion;
 import database.questionDatabase.QuestionDatabaseContext;
 import database.questionDatabase.SerializableStrategyQuestion;
 import javafx.application.Application;
@@ -15,7 +13,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.CategoryModel;
 import view.panels.AssesMainPane;
 import view.panels.CategoryDetailPane;
 import view.panels.CategoryOverviewPane;
@@ -38,8 +35,7 @@ public class Main extends Application {
 			CategoryOverviewPane categoryOverviewPane = new CategoryOverviewPane();
 			CategoryDetailPane categoryDetailPanel = new CategoryDetailPane();
 
-			CategoryModel categoryModel = new CategoryModel();
-			CategoryController categoryController = new CategoryController(categoryOverviewPane, categoryModel);
+			CategoryController categoryController = new CategoryController(categoryOverviewPane);
 			categoryController.setDatabaseService(databaseService);
             QuestionController questionController = new QuestionController(questionOverviewPane);
             questionController.setDatabaseService(databaseService);
