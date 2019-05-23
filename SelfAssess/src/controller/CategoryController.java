@@ -73,6 +73,7 @@ public class CategoryController {
             }
             categoryOverviewPane.getTable().getItems().addAll(category);
             databaseService.getCategories().add(category);
+            databaseService.getCategoryDatabaseContext().writeData(category);
             stage.close();
         }
     }

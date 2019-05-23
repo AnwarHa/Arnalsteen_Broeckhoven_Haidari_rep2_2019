@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
  *
  */
 public class SerializableStrategyQuestion implements QuestionDatabaseStrategy {
-    protected String path;
+    protected String path = "database/categoryDatabase/category.txt";
 
     public SerializableStrategyQuestion() {
     }
