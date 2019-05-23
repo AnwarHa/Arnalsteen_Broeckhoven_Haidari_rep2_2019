@@ -15,7 +15,7 @@ public class Category implements Serializable {
         return name;
     }
 
-    protected void setName(String name) {
+    public void setName(String name) {
         if(name.isEmpty()||name.equals("")){
             throw new DomainException("name can't be empty");
         }
@@ -26,7 +26,7 @@ public class Category implements Serializable {
         return description;
     }
 
-    protected void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
