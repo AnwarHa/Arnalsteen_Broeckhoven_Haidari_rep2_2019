@@ -48,25 +48,24 @@ public class Test {
     }
 
     public String printResults() {
-        String text = "Your score: " + askedQuestions.size() + "\n";
+        String text = "Your score: " + berekenScore() + "/" + askedQuestions.size() + "\n";
         for (Map.Entry<String, Integer> entry : score.entrySet()) {
             String category = entry.getKey();
             int points = entry.getValue();
             text += category + ": " + points + "/" + getAskedQuestionsOfCategory(category) + "\n";
         }
-        if (fullMarks() == true) {
+        if (berekenScore() == askedQuestions.size()) {
             text = "Schitterend! Alles perfect!";
         }
         return text;
     }
 
-    public boolean fullMarks() {
+    public int berekenScore() {
+        int points = 0;
         for (Map.Entry<String, Integer> entry : score.entrySet()) {
-            if (entry.getValue() != getAskedQuestionsOfCategory(entry.getKey())) {
-                return false;
-            }
+            points += entry.getValue();
         }
-        return true;
+        return points;
     }
 
     public List<String> getFeedback() {

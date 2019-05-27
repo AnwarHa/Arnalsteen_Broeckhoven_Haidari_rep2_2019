@@ -86,8 +86,6 @@ public class TestController {
                 stage.close();
             }
             messagePane.getTestButton().fire();
-
-
         }
     }
 }
