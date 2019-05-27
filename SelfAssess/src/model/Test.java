@@ -1,9 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Test {
     private List<Question> questions;
@@ -17,7 +14,6 @@ public class Test {
         this.askedQuestions = new ArrayList<>();
         this.feedback = new ArrayList<>();
         score = new HashMap<>();
-        Collections.shuffle(questions);
     }
 
     public void setQuestions(List<Question> questions) {
@@ -25,6 +21,7 @@ public class Test {
     }
 
     public Question findNextQuestion() {
+        Collections.shuffle(questions);
         for (Question question : questions) {
             if (!askedQuestions.contains(question)) {
                 askedQuestions.add(question);
@@ -50,12 +47,44 @@ public class Test {
         return false;
     }
 
+    public String printResults() {
+        String text = "Your score: " + askedQuestions.size() + "\n";
+        for (Map.Entry<String, Integer> entry : score.entrySet()) {
+            String category = entry.getKey();
+            int points = entry.getValue();
+            text += category + ": " + points + "/" + getAskedQuestionsOfCategory(category) + "\n";
+        }
+        if (fullMarks() == true) {
+            text = "Schitterend! Alles perfect!";
+        }
+        return text;
+    }
+
+    public boolean fullMarks() {
+        for (Map.Entry<String, Integer> entry : score.entrySet()) {
+            if (entry.getValue() != getAskedQuestionsOfCategory(entry.getKey())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public List<String> getFeedback() {
         return feedback;
     }
 
     public Question getCurrentQuestion() {
         return currentQuestion;
+    }
+
+    public int getAskedQuestionsOfCategory(String category) {
+        int count = 0;
+        for (Question question : askedQuestions) {
+            if (question != null && question.getCategory().equalsIgnoreCase(category)) {
+                count++;
+            }
+        }
+        return count;
     }
 
 }

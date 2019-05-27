@@ -14,7 +14,9 @@ import model.Test;
 import view.panels.MessagePane;
 import view.panels.TestPane;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 public class TestController {
     private TestPane testPane;
@@ -27,7 +29,6 @@ public class TestController {
     public TestController(MessagePane messagePane) {
         this.messagePane = messagePane;
         messagePane.getTestButton().setOnAction(new EvaluateTest());
-
     }
 
     public void setDatabaseService(DatabaseService databaseService) {
@@ -45,15 +46,23 @@ public class TestController {
 
             testPane.setStatementGroup(new ToggleGroup());
 
-            Question question = test.findNextQuestion();
-            testPane.getQuestionField().setText(question.getQuestion());
+            try {
+                Question question = test.findNextQuestion();
 
-            for (String answer : question.getStatements()) {
-                testPane.getvBox().getChildren().addAll(createButton(answer, testPane.getStatementGroup()));
+                testPane.getQuestionField().setText(question.getQuestion());
+
+                List<String> shuffledStatements = question.getStatements();
+                Collections.shuffle(shuffledStatements);
+                for (String answer : shuffledStatements) {
+                    testPane.getvBox().getChildren().addAll(createButton(answer, testPane.getStatementGroup()));
+                }
+
+                testPane.setProcessAnswerAction(new SubmitTest());
+                stage.show();
+            } catch (NullPointerException e) {
+                messagePane.getLabel().setText(test.printResults());
+
             }
-
-            testPane.setProcessAnswerAction(new SubmitTest());
-            stage.show();
         }
     }
 
@@ -69,17 +78,16 @@ public class TestController {
         public void handle(ActionEvent event) {
             RadioButton selectedRadioButton = (RadioButton) testPane.getStatementGroup().getSelectedToggle();
             String toggleGroupValue = selectedRadioButton.getText();
-            if(test.checkAnswer(toggleGroupValue) != true){
-                Label label = new Label();
-                label.setText(test.getCurrentQuestion().getFeedback());
-                messagePane.add(label, 0, 0);
+            if (test.checkAnswer(toggleGroupValue) != true) {
+                messagePane.getLabel().setText(test.getCurrentQuestion().getFeedback());
+                stage.close();
+            } else {
+                messagePane.getLabel().setText("Correct !");
                 stage.close();
             }
-            else{
-                stage.close();
-            }
+            messagePane.getTestButton().fire();
+
 
         }
     }
-
 }
