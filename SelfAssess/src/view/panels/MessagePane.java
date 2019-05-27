@@ -29,7 +29,7 @@ public class MessagePane extends GridPane {
         this.setHgap(5);
         
 		testButton = new Button("Evaluate");
-		add(testButton, 0,1,1,1);
+		add(testButton, 0,2,1,1);
 		setHalignment(testButton, HPos.CENTER);
 	}
 

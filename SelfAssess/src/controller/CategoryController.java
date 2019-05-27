@@ -19,6 +19,7 @@ public class CategoryController {
     private CategoryDetailPane categoryDetailPane;
     private DatabaseService databaseService;
     private Stage stage;
+    private List<Category> categories;
 
     public CategoryController(CategoryOverviewPane categoryOverviewPane) {
         this.categoryOverviewPane = categoryOverviewPane;
@@ -71,11 +72,10 @@ public class CategoryController {
             } catch (DomainException e) {
                 category = new Category(categoryDetailPane.getCategoryField().getValue().toString(), description);
             }
+            categories = databaseService.readCategories();
+            categories.add(category);
+            databaseService.writeCategories(categories);
             categoryOverviewPane.getTable().getItems().addAll(category);
-            List<Category> categoryList = databaseService.readCategories();
-            categoryList.add(category);
-            databaseService.writeCategories(categoryList);
-            databaseService.readCategories().add(category);
             stage.close();
         }
     }
