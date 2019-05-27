@@ -1,5 +1,6 @@
 package view.panels;
 
+import com.sun.rowset.internal.Row;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -14,10 +15,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import database.questionDatabase.QuestionDatabaseContext;
 import database.DatabaseService;
+import model.Category;
 
 
 public class CategoryOverviewPane extends GridPane {
-    private TableView table;
+    private TableView<Category> table;
     private Button btnNew;
 
 
@@ -46,12 +48,19 @@ public class CategoryOverviewPane extends GridPane {
         return table;
     }
 
+    public Category getSelectedRow(){
+        Category category = (Category)table.getSelectionModel().getSelectedItem();
+        System.out.println(category.getDescription());
+        return category;
+    }
+
     public void setNewAction(EventHandler<ActionEvent> newAction) {
         btnNew.setOnAction(newAction);
     }
 
     public void setEditAction(EventHandler<MouseEvent> editAction) {
         table.setOnMouseClicked(editAction);
-    }
 
+
+    }
 }

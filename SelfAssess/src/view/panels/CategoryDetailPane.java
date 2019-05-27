@@ -47,9 +47,13 @@ public class CategoryDetailPane extends GridPane{
         return titleField;
     }
 
+    public void setTitleField(String title){titleField.setText(title);}
+
     public TextField getDescriptionField() {
         return descriptionField;
     }
+
+    public void setDescriptionField(String description){descriptionField.setText(description);}
 
     public ComboBox getCategoryField() {
         return categoryField;

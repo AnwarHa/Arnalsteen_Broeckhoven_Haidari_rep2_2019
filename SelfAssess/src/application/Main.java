@@ -5,7 +5,9 @@ import controller.QuestionController;
 import controller.TestController;
 import database.DatabaseService;
 import database.categoryDatabase.CategoryDatabaseContext;
+import database.categoryDatabase.InMemoryStrategyCategory;
 import database.categoryDatabase.SerializableStrategyCategory;
+import database.questionDatabase.InMemoryStrategyQuestion;
 import database.questionDatabase.QuestionDatabaseContext;
 import database.questionDatabase.SerializableStrategyQuestion;
 import javafx.application.Application;
@@ -26,8 +28,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		try {
-			//DatabaseService databaseService = new DatabaseService(new QuestionDatabaseContext(new InMemoryStrategyQuestion()), new CategoryDatabaseContext(new InMemoryStrategyCategory()));
-            DatabaseService databaseService = new DatabaseService(new QuestionDatabaseContext(new SerializableStrategyQuestion()), new CategoryDatabaseContext(new SerializableStrategyCategory()));
+			DatabaseService databaseService = new DatabaseService(new QuestionDatabaseContext(new InMemoryStrategyQuestion()), new CategoryDatabaseContext(new InMemoryStrategyCategory()));
+            //DatabaseService databaseService = new DatabaseService(new QuestionDatabaseContext(new SerializableStrategyQuestion()), new CategoryDatabaseContext(new SerializableStrategyCategory()));
 
 			QuestionOverviewPane questionOverviewPane = new QuestionOverviewPane();
 			QuestionDetailPane questionDetailPane = new QuestionDetailPane();
