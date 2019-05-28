@@ -1,6 +1,5 @@
 package database;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import model.DomainException;
 import model.ListItem;
 import org.apache.commons.io.FileUtils;
