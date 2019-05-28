@@ -2,6 +2,7 @@ package controller;
 
 
 import database.DatabaseService;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -9,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Category;
 import model.DomainException;
+import model.Observable;
 import view.panels.CategoryDetailPane;
 import view.panels.CategoryOverviewPane;
 
@@ -67,6 +69,7 @@ public class CategoryController {
             String name = categoryDetailPane.getTitleField().getText();
             String description = categoryDetailPane.getDescriptionField().getText();
 
+<<<<<<< Updated upstream
                 Category category;
                 try {
                     category = new Category(name, description);
@@ -80,6 +83,16 @@ public class CategoryController {
                 databaseService.writeCategories(categoryList);
                 databaseService.readCategories().add(category);
 
+=======
+            } catch (DomainException e) {
+                category = new Category(categoryDetailPane.getCategoryField().getValue().toString(), description);
+            }
+            categoryOverviewPane.getTable().getItems().addAll(category);
+            ObservableList<Observable> categoryList = databaseService.readCategories();
+            categoryList.add(category);
+            databaseService.writeCategories(categoryList);
+            databaseService.readCategories().add(category);
+>>>>>>> Stashed changes
             stage.close();
         }
     }

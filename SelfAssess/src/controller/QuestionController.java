@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.Observable;
 import model.Question;
 import database.*;
 import view.panels.QuestionDetailPane;
@@ -46,7 +47,7 @@ public class QuestionController {
         return shuffled;
     }
 
-    public List<Question> getQuestions() {
+    public ObservableList<Observable> getQuestions() {
         return databaseService.readQuestions();
     }
 

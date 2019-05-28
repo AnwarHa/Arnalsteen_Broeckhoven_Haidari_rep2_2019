@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.List;
 
-public class Category implements Serializable {
+public class Category implements Serializable,Observable {
     protected String name, description;
 
     public Category(String name, String description) {
