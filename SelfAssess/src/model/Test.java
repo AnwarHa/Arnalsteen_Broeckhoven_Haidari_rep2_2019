@@ -2,7 +2,7 @@ package model;
 
 import java.util.*;
 
-public class Test implements Observable{
+public class Test implements Observer{
     private List<Question> questions;
     private List<Question> askedQuestions;
     private List<String> feedback;
@@ -86,4 +86,8 @@ public class Test implements Observable{
         return count;
     }
 
+    @Override
+    public void update() {
+
+    }
 }
