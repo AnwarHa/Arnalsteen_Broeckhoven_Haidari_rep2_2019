@@ -52,11 +52,11 @@ public class DatabaseService {
 
     }
 
-<<<<<<< Updated upstream
+/*
     public void writeQuestions(List<Question> questions) {
-=======
+*/
     public void writetQuestions(ObservableList<Observable> questions) {
->>>>>>> Stashed changes
+
         if (questions.isEmpty()) {
             throw new DatabaseException("can not set questions: list is empty");
         } else {
@@ -74,7 +74,7 @@ public class DatabaseService {
         return desc;
     }
 
-    public List<String> getCategoryNames() {
+    public List<String> getCategoryNames(){
         List<String> names = new ArrayList<>();
         Iterator it = databaseContext.loadCategories(strategy).iterator();
         while (it.hasNext()) {
@@ -87,7 +87,8 @@ public class DatabaseService {
         List<String> stat = new ArrayList<>();
         Iterator it = databaseContext.loadQuestions(strategy).iterator();
         while(it.hasNext()) {
-            Question question = (Question) it.next();
+            Question question;
+            question = (Question) it.next();
             if (question.equals(q)) {
                 stat = question.getStatements();
                 break;
@@ -108,14 +109,21 @@ public class DatabaseService {
         return newList;
     }
 
-    /*public Category getCategoryByDescription(String desc) {
-        for(Category category: readCategories()){
-            if(category.getDescription().equalsIgnoreCase(desc)){
-                return category;
+    public Category getCategoryByDescription(String desc) {
+        Category out = null;
+        for(Observable observable: readCategories()){
+            if(observable instanceof Category){
+                Category category = (Category) observable;
+                if(category.getDescription().equalsIgnoreCase(desc)){
+                    out = category;
+                }
+            }else{
+                throw new DatabaseException("wrong type of observable in list");
             }
+            if(out != null)break;
         }
         return null;
-    }*/
+    }
 }
 
 

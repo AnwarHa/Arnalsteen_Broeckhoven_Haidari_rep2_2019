@@ -69,7 +69,7 @@ public class CategoryController {
             String name = categoryDetailPane.getTitleField().getText();
             String description = categoryDetailPane.getDescriptionField().getText();
 
-<<<<<<< Updated upstream
+
                 Category category;
                 try {
                     category = new Category(name, description);
@@ -83,7 +83,7 @@ public class CategoryController {
                 databaseService.writeCategories(categoryList);
                 databaseService.readCategories().add(category);
 
-=======
+/*
             } catch (DomainException e) {
                 category = new Category(categoryDetailPane.getCategoryField().getValue().toString(), description);
             }
@@ -92,7 +92,7 @@ public class CategoryController {
             categoryList.add(category);
             databaseService.writeCategories(categoryList);
             databaseService.readCategories().add(category);
->>>>>>> Stashed changes
+*/
             stage.close();
         }
     }

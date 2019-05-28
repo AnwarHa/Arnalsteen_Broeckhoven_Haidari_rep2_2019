@@ -6,24 +6,18 @@ import javafx.collections.ObservableList;
 import java.io.Serializable;
 import java.util.List;
 
-<<<<<<< Updated upstream
-public class Question implements Serializable {
-    private String question, correctAnswer, category, feedback;
-    private ObservableList<String> statements;
 
-    public Question(String question, String category, ObservableList<String> statements, String feedback) {
-=======
 public class Question implements Serializable,Observable {
     private String name, correctAnswer, category, feedback;
-    private List<String> statements;
+    private ObservableList<String> statements;
 
-    public Question(String name, String category, List<String> statements, String feedback) {
->>>>>>> Stashed changes
+    public Question(String name, String category, ObservableList<String> statements, String feedback) {
+
         try
         {
         setStatements(statements);
         setCorrectAnswer();
-        setName(name);
+        setQuestion(name);
         setCategory(category);
         setFeedback(feedback);
         }catch(Exception e) {
@@ -31,15 +25,10 @@ public class Question implements Serializable,Observable {
         }
     }
 
-<<<<<<< Updated upstream
-    public void setFeedback(String feedback) {
-        if(question.trim().equals("")||question.trim().isEmpty()){
-            throw new IllegalArgumentException("question phrase can't be empty");
-=======
+
     private void setFeedback(String feedback) {
         if(name.trim().equals("")|| name.trim().isEmpty()){
             throw new IllegalArgumentException("name phrase can't be empty");
->>>>>>> Stashed changes
         }else {
             this.feedback = feedback;
         }
@@ -61,15 +50,10 @@ public class Question implements Serializable,Observable {
         return name;
     }
 
-<<<<<<< Updated upstream
-    public void setQuestion(String question) {
-        if(question.trim().equals("")||question.trim().isEmpty()){
+
+    public void setQuestion(String name) {
+        if(name.trim().equals("")||name.trim().isEmpty()){
             throw new IllegalArgumentException("question phrase can't be empty");
-=======
-    private void setName(String name) {
-        if(name.trim().equals("")|| name.trim().isEmpty()){
-            throw new IllegalArgumentException("name phrase can't be empty");
->>>>>>> Stashed changes
         }else{
             this.name = name;
         }
