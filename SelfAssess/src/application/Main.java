@@ -9,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.Question;
 import view.panels.AssesMainPane;
 import view.panels.CategoryDetailPane;
 import view.panels.CategoryOverviewPane;
@@ -22,6 +23,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends Application {
 	@Override
@@ -43,8 +46,25 @@ public class Main extends Application {
 			} finally {
 				reader.close();
 			}*/
+
 			//hier moet de strategy in komen via de properties file
 			DatabaseService databaseService = new DatabaseService("TxtDatabase");
+			List<String> statementstest = new ArrayList<>();
+			statementstest.add("juiste antwoord");
+			statementstest.add("fout antwoord 1");
+			statementstest.add("fout antwoord 2");
+			Question testeen = new Question("eerste vraag","category1",statementstest,"feedback1");
+			Question testtwee = new Question("tweede vraag","category2",statementstest,"feedback2");
+			Question testdrie = new Question("derde vraag","category3",statementstest,"feedback3");
+			ArrayList<Question> testje = new ArrayList<>();
+			testje.add(testeen);
+			testje.add(testtwee);
+			testje.add(testdrie);
+			databaseService.writeQuestions(testje);
+			for(Question q : databaseService.readQuestions()){
+				System.out.println("vraag: "+ q.getName()+q.getCategory()+q.getStatements().size()+q.getFeedback());
+			}
+
 
 			QuestionOverviewPane questionOverviewPane = new QuestionOverviewPane();
 			QuestionDetailPane questionDetailPane = new QuestionDetailPane();

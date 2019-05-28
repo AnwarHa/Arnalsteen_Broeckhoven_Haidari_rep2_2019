@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Category;
 import model.DomainException;
+import model.ListItem;
 import view.panels.CategoryDetailPane;
 import view.panels.CategoryOverviewPane;
 
@@ -71,22 +72,22 @@ public class CategoryController {
             try {
                 category = new Category(name, description);
 
-            } catch (DomainException e) {
+            /*} catch (DomainException e) {
                 category = new Category(categoryDetailPane.getCategoryField().getValue().toString(), description);
             }
             categoryOverviewPane.getTable().getItems().addAll(category);
-            databaseService.readCategories().add(category);
+            databaseService.readCategories().add(category);*/
 
-/*
+
             } catch (DomainException e) {
                 category = new Category(categoryDetailPane.getCategoryField().getValue().toString(), description);
             }
             categoryOverviewPane.getTable().getItems().addAll(category);
-            ObservableList<Observable> categoryList = databaseService.readCategories();
+            List<Category> categoryList = databaseService.readCategories();
             categoryList.add(category);
             databaseService.writeCategories(categoryList);
             databaseService.readCategories().add(category);
-*/
+
             stage.close();
         }
     }

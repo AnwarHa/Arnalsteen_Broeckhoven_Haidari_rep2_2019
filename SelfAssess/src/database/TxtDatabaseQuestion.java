@@ -38,6 +38,7 @@ public class TxtDatabaseQuestion extends TxtDatabaseStrategy{
             List<String> answers = new ArrayList<>();
 
             for(int i = 3; i < list.size(); i++) answers.add(list.get(i));
+
             objects.add(new Question(list.get(0),list.get(1),answers,list.get(2)));
         }
 

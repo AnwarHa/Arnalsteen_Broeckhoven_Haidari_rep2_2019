@@ -46,11 +46,10 @@ public class TestController {
 
             testPane.setStatementGroup(new ToggleGroup());
 
-<<<<<<< Updated upstream
             try {
                 Question question = test.findNextQuestion();
 
-                testPane.getQuestionField().setText(question.getQuestion());
+                testPane.getQuestionField().setText(question.getName());
 
                 List<String> shuffledStatements = question.getStatements();
                 Collections.shuffle(shuffledStatements);
@@ -62,13 +61,6 @@ public class TestController {
                 stage.show();
             } catch (NullPointerException e) {
                 messagePane.getLabel().setText(test.printResults());
-=======
-            Question nextQuestion = (Question) databaseService.readQuestions().iterator().next();
-            testPane.getQuestionField().setText(nextQuestion.getName());
-            for (String answer : nextQuestion.getStatements()) {
-                testPane.getvBox().getChildren().addAll(createButton(answer, testPane.getStatementGroup()));
-            }
->>>>>>> Stashed changes
 
             }
         }

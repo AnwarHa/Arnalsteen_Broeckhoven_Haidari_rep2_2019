@@ -66,7 +66,7 @@ public abstract class TxtDatabaseStrategy implements DatabaseStrategy {
                 }
 
             }
-            System.out.println(out);
+            System.out.println("writestring\n"+out);
             byte[] strBytes = out.getBytes();
             outputStream.write(strBytes);
             outputStream.close();
@@ -80,15 +80,16 @@ public abstract class TxtDatabaseStrategy implements DatabaseStrategy {
 
         boolean isSuccesful = true;
         HashMap<Integer,List<String>> allStrings = new HashMap<>();
-        ArrayList<String> strings = new ArrayList<>();
+
         try {
             System.out.println(FileUtils.readFileToString(this.file, StandardCharsets.UTF_8));
             Scanner scan = new Scanner(FileUtils.readFileToString(this.file, StandardCharsets.UTF_8));
             scan.useDelimiter("\n");
             int i = 0;
+            System.out.println("read method--");
             while (scan.hasNextLine()) {
+                ArrayList<String> strings = new ArrayList<>();
                 System.out.println("i= "+ i);
-                strings.clear();
                 Scanner line = new Scanner(scan.nextLine());
                 line.useDelimiter(",");
                 while(line.hasNext()){
@@ -97,6 +98,7 @@ public abstract class TxtDatabaseStrategy implements DatabaseStrategy {
                     strings.add(next);
                 }
                 System.out.println("waarde van array= "+strings.get(0)+"(0) en "+strings.get(1)+" (1)");
+                System.out.println("--read method");
                 allStrings.put(i,strings);
                 i++;
             }
@@ -106,6 +108,8 @@ public abstract class TxtDatabaseStrategy implements DatabaseStrategy {
             throw new DatabaseException("Error when trying to read txt file.");
         }finally{
             System.out.println("Succesfully scanned = "+ isSuccesful+ " (number of objects= "+allStrings.size()+")");
+            System.out.println(allStrings.get(0).get(0));
+            System.out.println(allStrings.get(1).get(0));
         }
         return allStrings;
     }
