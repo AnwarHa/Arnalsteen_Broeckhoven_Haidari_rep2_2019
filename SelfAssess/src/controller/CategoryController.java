@@ -20,6 +20,7 @@ public class CategoryController {
     private CategoryDetailPane categoryDetailPane;
     private DatabaseService databaseService;
     private Stage stage;
+    private List<Category> categories;
 
     public CategoryController(CategoryOverviewPane categoryOverviewPane) {
         this.categoryOverviewPane = categoryOverviewPane;

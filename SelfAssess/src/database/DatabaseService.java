@@ -51,7 +51,7 @@ public class DatabaseService {
 
     }
 
-    public void writetQuestions(List<Question> questions) {
+    public void writeQuestions(List<Question> questions) {
         if (questions.isEmpty()) {
             throw new DatabaseException("can not set questions: list is empty");
         } else {

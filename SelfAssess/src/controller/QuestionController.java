@@ -21,6 +21,7 @@ public class QuestionController {
     private QuestionDetailPane questionDetailPane;
     private DatabaseService databaseService;
     private Stage stage;
+    private List<Question> questions;
 
     private ObservableList<String> answers;
     private ObservableList<String> teVerwijderen;
@@ -96,7 +97,7 @@ public class QuestionController {
         }
     }
 
-    class CancelQuestion implements EventHandler<ActionEvent>{
+    class CancelQuestion implements EventHandler<ActionEvent> {
 
         @Override
         public void handle(ActionEvent event) {
@@ -104,16 +105,17 @@ public class QuestionController {
         }
     }
 
-    class SaveQuestion implements EventHandler<ActionEvent>{
+    class SaveQuestion implements EventHandler<ActionEvent> {
 
         @Override
         public void handle(ActionEvent event) {
-            String correctAnswer = answers.get(0);
             String question = questionDetailPane.getQuestionField().getText();
             String category = questionDetailPane.getCategoryField().getValue().toString();
             String feedback = questionDetailPane.getFeedbackField().getText();
             Question questionObject = new Question(question, category, answers, feedback);
-            databaseService.readQuestions().add(questionObject);
+            questions = databaseService.readQuestions();
+            questions.add(questionObject);
+            databaseService.writeQuestions(questions);
             questionOverviewPane.getTable().getItems().addAll(questionObject);
             stage.close();
 
