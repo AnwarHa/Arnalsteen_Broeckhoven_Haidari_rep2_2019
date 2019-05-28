@@ -9,9 +9,9 @@ import java.util.List;
 
 public class Question implements Serializable,Observable {
     private String name, correctAnswer, category, feedback;
-    private ObservableList<String> statements;
+    private List<String> statements;
 
-    public Question(String name, String category, ObservableList<String> statements, String feedback) {
+    public Question(String name, String category, List<String> statements, String feedback) {
 
         try
         {
@@ -26,7 +26,7 @@ public class Question implements Serializable,Observable {
     }
 
 
-    private void setFeedback(String feedback) {
+    public void setFeedback(String feedback) {
         if(name.trim().equals("")|| name.trim().isEmpty()){
             throw new IllegalArgumentException("name phrase can't be empty");
         }else {
@@ -71,11 +71,11 @@ public class Question implements Serializable,Observable {
         this.category = category;
     }
 
-    public ObservableList<String> getStatements(){
+    public List<String> getStatements(){
         return this.statements;
     }
 
-    public void setStatements(ObservableList<String> statements){
+    public void setStatements(List<String> statements){
         if(statements.isEmpty()){
             throw new IllegalArgumentException("list of statements can't be empty");
         }else{

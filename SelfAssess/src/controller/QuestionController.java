@@ -47,7 +47,7 @@ public class QuestionController {
         return shuffled;
     }
 
-    public ObservableList<Observable> getQuestions() {
+    public List<Question> getQuestions() {
         return databaseService.readQuestions();
     }
 
@@ -116,7 +116,7 @@ public class QuestionController {
             Question questionObject = new Question(question, category, answers, feedback);
             questions = databaseService.readQuestions();
             questions.add(questionObject);
-            databaseService.writeQuestions(questions);
+            databaseService.writetQuestions(questions);
             questionOverviewPane.getTable().getItems().addAll(questionObject);
             stage.close();
 
@@ -129,7 +129,7 @@ public class QuestionController {
                 stage = new Stage();
                 questionDetailPane = new QuestionDetailPane();
                 Question question = questionOverviewPane.getSelectedRow();
-                questionDetailPane.setQuestionField(question.getQuestion());
+                questionDetailPane.setQuestionField(question.getName());
                 questionDetailPane.setStatementsArea(question.getStatements());
                 questionDetailPane.setFeedbackField(question.getFeedback());
                 questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
@@ -172,7 +172,7 @@ public class QuestionController {
                 question.setCategory(category);
                 question.setFeedback(feedback);
                 question.setStatements(statements);
-                questionOverviewPane.getTable().getItems().addAll(databaseService.getQuestionDatabaseContext());
+                questionOverviewPane.getTable().getItems().addAll(databaseService.readQuestions());
                 stage.close();
             }
         }

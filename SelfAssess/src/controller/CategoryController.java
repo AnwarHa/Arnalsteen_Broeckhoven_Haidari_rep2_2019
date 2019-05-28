@@ -78,9 +78,6 @@ public class CategoryController {
                     category = new Category(categoryDetailPane.getCategoryField().getValue().toString(), description);
                 }
                 categoryOverviewPane.getTable().getItems().addAll(category);
-                List<Category> categoryList = databaseService.readCategories();
-                categoryList.add(category);
-                databaseService.writeCategories(categoryList);
                 databaseService.readCategories().add(category);
 
 /*

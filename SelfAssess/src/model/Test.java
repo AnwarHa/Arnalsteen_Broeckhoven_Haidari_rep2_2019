@@ -2,7 +2,7 @@ package model;
 
 import java.util.*;
 
-public class Test {
+public class Test implements Observable{
     private List<Question> questions;
     private List<Question> askedQuestions;
     private List<String> feedback;

@@ -11,14 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-<<<<<<< Updated upstream
-import javafx.stage.Stage;
-import database.questionDatabase.QuestionDatabaseContext;
-import database.DatabaseService;
 import model.Category;
-=======
-
->>>>>>> Stashed changes
 
 
 public class CategoryOverviewPane extends GridPane {

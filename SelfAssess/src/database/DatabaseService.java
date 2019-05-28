@@ -35,15 +35,31 @@ public class DatabaseService {
     }
 
 
-    public ObservableList<Observable> readCategories() {
-        return databaseContext.loadCategories(strategy);
+    public List<Category> readCategories() {
+        Iterator it = databaseContext.loadCategories(strategy).iterator();
+        List<Category> out = new ArrayList<>();
+        while(it.hasNext()){
+            Observable temp = (Observable)it.next();
+            if(temp instanceof Question){
+                out.add((Category) temp);
+            }
+        }
+        return out;
     }
 
-    public ObservableList<Observable> readQuestions() {
-        return databaseContext.loadQuestions(strategy);
+    public List<Question> readQuestions() {
+        Iterator it = databaseContext.loadQuestions(strategy).iterator();
+        List<Question> out = new ArrayList<>();
+        while(it.hasNext()){
+            Observable temp = (Observable)it.next();
+            if(temp instanceof Question){
+                out.add((Question)temp);
+            }
+        }
+        return out;
     }
 
-    public void writeCategories(ObservableList<Observable> categories) {
+    public void writeCategories(List<Observable> categories) {
         if (categories.isEmpty()) {
             throw new DatabaseException("can not set categories: list is empty");
         } else {
@@ -55,7 +71,7 @@ public class DatabaseService {
 /*
     public void writeQuestions(List<Question> questions) {
 */
-    public void writetQuestions(ObservableList<Observable> questions) {
+    public void writetQuestions(List<Observable> questions) {
 
         if (questions.isEmpty()) {
             throw new DatabaseException("can not set questions: list is empty");

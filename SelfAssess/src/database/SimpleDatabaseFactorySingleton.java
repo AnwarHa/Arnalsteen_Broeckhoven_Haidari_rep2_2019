@@ -5,7 +5,6 @@ import model.Category;
 import model.Observable;
 import model.Question;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleDatabaseFactorySingleton {
@@ -13,8 +12,8 @@ public class SimpleDatabaseFactorySingleton {
     private SimpleDatabaseFactorySingleton(){
 
     }
-    public ObservableList<Observable> loadCategories(String strategy){
-        ObservableList<Observable> categories;
+    public List<Category> loadCategories(String strategy){
+        List<Category> categories;
         try {
             Class<?> strat = Class.forName("database." + strategy + "Category" );
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();
@@ -25,7 +24,7 @@ public class SimpleDatabaseFactorySingleton {
         return categories;
     }
 
-    public ObservableList<Observable> loadQuestions(String strategy){
+    public List<Question> loadQuestions(String strategy){
         ObservableList<Observable> questions;
         try {
             Class<?> strat = Class.forName("database." + strategy + "Question" );
@@ -37,7 +36,7 @@ public class SimpleDatabaseFactorySingleton {
         return questions;
     }
 
-    public void writeQuestions(ObservableList<Observable> items, String strategy){
+    public void writeQuestions(List<Observable> items, String strategy){
         try {
             Class<?> strat = Class.forName("database." + strategy + "Question" );
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();
@@ -47,7 +46,7 @@ public class SimpleDatabaseFactorySingleton {
         }
     }
 
-    public void writeCategories(ObservableList<Observable> items, String strategy){
+    public void writeCategories(List<Observable> items, String strategy){
         try {
             Class<?> strat = Class.forName("database." + strategy + "Category" );
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();

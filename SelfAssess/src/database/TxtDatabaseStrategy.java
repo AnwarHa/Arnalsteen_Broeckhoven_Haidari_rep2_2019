@@ -9,7 +9,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-public abstract class TxtDatabaseStrategy implements DatabaseStrategy  {
+public abstract class TxtDatabaseStrategy implements DatabaseStrategy {
     protected File file;
     protected ObservableList<Observable> objects;
 
