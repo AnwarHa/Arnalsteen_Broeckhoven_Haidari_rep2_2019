@@ -94,17 +94,25 @@ public class QuestionDetailPane extends GridPane {
 		return questionField;
 	}
 
+	public void setQuestionField(String text){questionField.setText(text);}
+
 	public ComboBox getCategoryField() {
 		return categoryField;
 	}
+
+	public void setCategoryField(String category){categoryField.getSelectionModel().select(category);}
 
 	public ListView<String> getStatementsArea() {
 		return statementsArea;
 	}
 
+	public void setStatementsArea(ObservableList<String> list){statementsArea.setItems(list);}
+
 	public TextField getFeedbackField() {
 		return feedbackField;
 	}
+
+	public void setFeedbackField(String text){feedbackField.setText(text);}
 
 	public TextField getStatementField() {
 		return statementField;

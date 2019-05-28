@@ -60,14 +60,11 @@ public class CategoryController {
     }
 
     class addCategory implements EventHandler<ActionEvent> {
-
         @Override
         public void handle(ActionEvent event) {
 
             String name = categoryDetailPane.getTitleField().getText();
             String description = categoryDetailPane.getDescriptionField().getText();
-
-
 
                 Category category;
                 try {
@@ -81,7 +78,6 @@ public class CategoryController {
                 categoryList.add(category);
                 databaseService.writeCategories(categoryList);
                 databaseService.readCategories().add(category);
-
 
             stage.close();
         }

@@ -13,7 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
+import model.Question;
 
 
 public class QuestionOverviewPane extends GridPane {
@@ -44,6 +44,11 @@ public class QuestionOverviewPane extends GridPane {
 
 	public TableView getTable() {
 		return table;
+	}
+
+	public Question getSelectedRow(){
+		Question category = (Question) table.getSelectionModel().getSelectedItem();
+		return category;
 	}
 
 	public void setNewAction(EventHandler<ActionEvent> newAction) {

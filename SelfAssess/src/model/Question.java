@@ -1,6 +1,8 @@
 
 package model;
 
+import javafx.collections.ObservableList;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
@@ -8,9 +10,9 @@ import java.util.List;
 
 public class Question implements Serializable {
     private String question, correctAnswer, category, feedback;
-    private List<String> statements;
+    private ObservableList<String> statements;
 
-    public Question(String question, String category, List<String> statements, String feedback) {
+    public Question(String question, String category, ObservableList<String> statements, String feedback) {
         try
         {
         setStatements(statements);
@@ -23,7 +25,7 @@ public class Question implements Serializable {
         }
     }
 
-    private void setFeedback(String feedback) {
+    public void setFeedback(String feedback) {
         if(question.trim().equals("")||question.trim().isEmpty()){
             throw new IllegalArgumentException("question phrase can't be empty");
         }else {
@@ -35,7 +37,7 @@ public class Question implements Serializable {
         return  this.feedback;
     }
 
-    private void setCorrectAnswer() {
+    public void setCorrectAnswer() {
         this.correctAnswer = this.statements.get(0);
     }
 
@@ -47,7 +49,7 @@ public class Question implements Serializable {
         return question;
     }
 
-    private void setQuestion(String question) {
+    public void setQuestion(String question) {
         if(question.trim().equals("")||question.trim().isEmpty()){
             throw new IllegalArgumentException("question phrase can't be empty");
         }else{
@@ -63,15 +65,15 @@ public class Question implements Serializable {
         this.statements.addAll(answers);
     }
 
-    private void setCategory(String category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
-    public List<String> getStatements(){
+    public ObservableList<String> getStatements(){
         return this.statements;
     }
 
-    public void setStatements(List<String> statements){
+    public void setStatements(ObservableList<String> statements){
         if(statements.isEmpty()){
             throw new IllegalArgumentException("list of statements can't be empty");
         }else{

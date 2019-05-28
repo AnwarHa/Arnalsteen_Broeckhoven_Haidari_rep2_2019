@@ -50,7 +50,6 @@ public class CategoryOverviewPane extends GridPane {
 
     public Category getSelectedRow(){
         Category category = (Category)table.getSelectionModel().getSelectedItem();
-        System.out.println(category.getDescription());
         return category;
     }
 
