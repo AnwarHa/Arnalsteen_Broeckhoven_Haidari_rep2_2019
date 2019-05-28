@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.List;
 
-public class Category implements Serializable,Observable {
+public class Category implements Serializable,ListItem {
     protected String name, description;
 
     public Category(String name, String description) {
@@ -34,9 +34,6 @@ public class Category implements Serializable,Observable {
     public List<Question> getQuestions() {
         return null;
     }
-
-
-
 
 
 }

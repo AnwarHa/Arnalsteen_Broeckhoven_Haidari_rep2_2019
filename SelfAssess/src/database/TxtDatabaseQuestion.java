@@ -1,14 +1,5 @@
 package database;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import model.DomainException;
-import model.Observable;
 import model.Question;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.*;
 
 public class TxtDatabaseQuestion extends TxtDatabaseStrategy{

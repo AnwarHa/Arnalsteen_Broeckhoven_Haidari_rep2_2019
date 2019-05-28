@@ -1,5 +1,4 @@
 package controller;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -7,12 +6,10 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import model.Observable;
 import model.Question;
 import database.*;
 import view.panels.QuestionDetailPane;
 import view.panels.QuestionOverviewPane;
-
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -23,7 +20,6 @@ public class QuestionController {
     private DatabaseService databaseService;
     private Stage stage;
     private List<Question> questions;
-
     private ObservableList<String> answers;
     private ObservableList<String> teVerwijderen;
 
@@ -116,7 +112,7 @@ public class QuestionController {
             Question questionObject = new Question(question, category, answers, feedback);
             questions = databaseService.readQuestions();
             questions.add(questionObject);
-            databaseService.writetQuestions(questions);
+            databaseService.writeQuestions(questions);
             questionOverviewPane.getTable().getItems().addAll(questionObject);
             stage.close();
 

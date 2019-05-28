@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 
-public class Question implements Serializable,Observable {
+public class Question implements Serializable,ListItem {
     private String name, correctAnswer, category, feedback;
     private List<String> statements;
 
@@ -82,5 +82,7 @@ public class Question implements Serializable,Observable {
             this.statements = statements;
         }
     }
+
+
 }
 

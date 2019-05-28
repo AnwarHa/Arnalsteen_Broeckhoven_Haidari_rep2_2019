@@ -1,9 +1,7 @@
 package database;
-import javafx.collections.ObservableList;
 import model.Category;
-import model.Observable;
+import model.ListItem;
 import model.Question;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -39,8 +37,8 @@ public class DatabaseService {
         Iterator it = databaseContext.loadCategories(strategy).iterator();
         List<Category> out = new ArrayList<>();
         while(it.hasNext()){
-            Observable temp = (Observable)it.next();
-            if(temp instanceof Question){
+            ListItem temp = (ListItem) it.next();
+            if(temp instanceof Category){
                 out.add((Category) temp);
             }
         }
@@ -51,7 +49,7 @@ public class DatabaseService {
         Iterator it = databaseContext.loadQuestions(strategy).iterator();
         List<Question> out = new ArrayList<>();
         while(it.hasNext()){
-            Observable temp = (Observable)it.next();
+            ListItem temp = (ListItem) it.next();
             if(temp instanceof Question){
                 out.add((Question)temp);
             }
@@ -59,11 +57,15 @@ public class DatabaseService {
         return out;
     }
 
-    public void writeCategories(List<Observable> categories) {
+    public void writeCategories(List<Category> categories) {
         if (categories.isEmpty()) {
             throw new DatabaseException("can not set categories: list is empty");
         } else {
-            databaseContext.writeCategories(categories,strategy);
+            List<ListItem> items = new ArrayList<>();
+            for(ListItem l : categories){
+                items.add(l);
+            }
+            databaseContext.writeCategories(items,strategy);
         }
 
     }
@@ -71,12 +73,15 @@ public class DatabaseService {
 /*
     public void writeQuestions(List<Question> questions) {
 */
-    public void writetQuestions(List<Observable> questions) {
-
+    public void writeQuestions(List<Question> questions) {
         if (questions.isEmpty()) {
             throw new DatabaseException("can not set questions: list is empty");
         } else {
-           databaseContext.writeQuestions(questions,strategy);
+            List<ListItem> items = new ArrayList<>();
+            for(ListItem l : questions){
+                items.add(l);
+            }
+           databaseContext.writeQuestions(items,strategy);
         }
 
     }
@@ -127,7 +132,7 @@ public class DatabaseService {
 
     public Category getCategoryByDescription(String desc) {
         Category out = null;
-        for(Observable observable: readCategories()){
+        for(ListItem observable: readCategories()){
             if(observable instanceof Category){
                 Category category = (Category) observable;
                 if(category.getDescription().equalsIgnoreCase(desc)){

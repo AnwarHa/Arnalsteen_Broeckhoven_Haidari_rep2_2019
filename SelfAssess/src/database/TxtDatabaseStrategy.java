@@ -2,16 +2,15 @@ package database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.DomainException;
-import model.Observable;
+import model.ListItem;
 import org.apache.commons.io.FileUtils;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public abstract class TxtDatabaseStrategy implements DatabaseStrategy {
     protected File file;
-    protected ObservableList<Observable> objects;
+    protected List<ListItem> objects;
 
     public TxtDatabaseStrategy(String path) {
         setFile(path);
@@ -28,13 +27,13 @@ public abstract class TxtDatabaseStrategy implements DatabaseStrategy {
     }
 
     @Override
-    public final ObservableList<Observable> readData() {
+    public final List<ListItem> readData() {
         stringToObject(read());
         return this.objects;
     }
 
     @Override
-    public final void writeData(ObservableList<Observable> objects) {
+    public final void writeData(List<ListItem> objects) {
         writeString(objectToStringListInMap());
         System.out.println("data succesfully written to file");
     }

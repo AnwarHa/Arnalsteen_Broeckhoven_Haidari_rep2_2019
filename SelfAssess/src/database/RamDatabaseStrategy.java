@@ -2,22 +2,22 @@ package database;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Observable;
-
+import model.ListItem;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class RamDatabaseStrategy implements DatabaseStrategy {
-    ObservableList<Observable> items = FXCollections.observableArrayList(new ArrayList<>());
+    ObservableList<ListItem> items = FXCollections.observableArrayList(new ArrayList<>());
     public RamDatabaseStrategy() {
     }
 
     @Override
-    public ObservableList<Observable> readData() {
+    public List<ListItem> readData() {
         return items;
     }
 
     @Override
-    public void writeData(ObservableList<Observable> o) {
-        this.items = o;
+    public void writeData(List<ListItem> o) {
+        this.items.addAll(o);
     }
 }

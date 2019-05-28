@@ -3,12 +3,7 @@ package database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Category;
-import model.DomainException;
-import model.Observable;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import model.ListItem;
 import java.util.*;
 
 public class TxtDatabaseCategory extends TxtDatabaseStrategy {
@@ -23,9 +18,9 @@ public class TxtDatabaseCategory extends TxtDatabaseStrategy {
         int i = 0;
         while(it.hasNext()){
             List<String> strings = new ArrayList<>();
-            Observable observable = (Observable) it.next();
-            if(observable instanceof Category){
-                Category category = (Category) observable;
+            ListItem listItem = (ListItem) it.next();
+            if(listItem instanceof Category){
+                Category category = (Category) listItem;
                 List<String> temp = new ArrayList<>();
                 temp.add(category.getName());
                 temp.add(category.getDescription());

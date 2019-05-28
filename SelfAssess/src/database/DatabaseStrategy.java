@@ -1,12 +1,8 @@
 package database;
-
-import javafx.collections.ObservableList;
-import model.Category;
-import model.Observable;
-
+import model.ListItem;
 import java.util.List;
 
 public interface DatabaseStrategy {
-    public List<Category> readData();
-    public void writeData(List<Category> o);
+    public List<ListItem> readData();
+    public void writeData(List<ListItem> o);
 }

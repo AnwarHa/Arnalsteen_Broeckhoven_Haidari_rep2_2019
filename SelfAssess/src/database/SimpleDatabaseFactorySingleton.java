@@ -1,10 +1,5 @@
 package database;
-
-import javafx.collections.ObservableList;
-import model.Category;
-import model.Observable;
-import model.Question;
-
+import model.ListItem;
 import java.util.List;
 
 public class SimpleDatabaseFactorySingleton {
@@ -12,8 +7,8 @@ public class SimpleDatabaseFactorySingleton {
     private SimpleDatabaseFactorySingleton(){
 
     }
-    public List<Category> loadCategories(String strategy){
-        List<Category> categories;
+    public List<ListItem> loadCategories(String strategy){
+        List<ListItem> categories;
         try {
             Class<?> strat = Class.forName("database." + strategy + "Category" );
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();
@@ -24,8 +19,8 @@ public class SimpleDatabaseFactorySingleton {
         return categories;
     }
 
-    public List<Question> loadQuestions(String strategy){
-        ObservableList<Observable> questions;
+    public List<ListItem> loadQuestions(String strategy){
+        List<ListItem> questions;
         try {
             Class<?> strat = Class.forName("database." + strategy + "Question" );
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();
@@ -36,7 +31,7 @@ public class SimpleDatabaseFactorySingleton {
         return questions;
     }
 
-    public void writeQuestions(List<Observable> items, String strategy){
+    public void writeQuestions(List<ListItem> items, String strategy){
         try {
             Class<?> strat = Class.forName("database." + strategy + "Question" );
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();
@@ -46,7 +41,7 @@ public class SimpleDatabaseFactorySingleton {
         }
     }
 
-    public void writeCategories(List<Observable> items, String strategy){
+    public void writeCategories(List<ListItem> items, String strategy){
         try {
             Class<?> strat = Class.forName("database." + strategy + "Category" );
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();

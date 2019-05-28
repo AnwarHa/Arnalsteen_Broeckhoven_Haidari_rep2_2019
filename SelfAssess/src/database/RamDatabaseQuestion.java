@@ -1,7 +1,6 @@
 package database;
-
-import javafx.collections.ObservableList;
-import model.Observable;
+import model.ListItem;
+import java.util.List;
 
 public class RamDatabaseQuestion extends RamDatabaseStrategy {
     public RamDatabaseQuestion() {
@@ -9,7 +8,7 @@ public class RamDatabaseQuestion extends RamDatabaseStrategy {
     }
 
     @Override
-    public void writeData(ObservableList<Observable> o) {
+    public void writeData(List<ListItem> o) {
 
     }
 }

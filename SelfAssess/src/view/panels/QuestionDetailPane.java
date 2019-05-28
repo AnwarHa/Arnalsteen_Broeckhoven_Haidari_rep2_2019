@@ -106,7 +106,10 @@ public class QuestionDetailPane extends GridPane {
 		return statementsArea;
 	}
 
-	public void setStatementsArea(ObservableList<String> list){statementsArea.setItems(list);}
+	public void setStatementsArea(List<String> list){
+		ObservableList<String> out = FXCollections.observableList(list);
+		statementsArea.setItems(out);
+	}
 
 	public TextField getFeedbackField() {
 		return feedbackField;
