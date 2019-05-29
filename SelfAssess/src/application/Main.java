@@ -64,6 +64,7 @@ public class Main extends Application {
 			for(Question q : databaseService.readQuestions()){
 				System.out.println("vraag: "+ q.getName()+q.getCategory()+q.getStatements().size()+q.getFeedback());
 			}
+			System.out.println("catdesc length: "+databaseService.getCategoryDescriptions().size());
 
 
 			QuestionOverviewPane questionOverviewPane = new QuestionOverviewPane();

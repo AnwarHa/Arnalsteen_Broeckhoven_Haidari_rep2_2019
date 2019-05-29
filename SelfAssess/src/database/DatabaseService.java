@@ -88,9 +88,10 @@ public class DatabaseService {
 
     public List<String> getCategoryDescriptions() {
         List<String> desc = new ArrayList<>();
-        Iterator it = databaseContext.loadCategories(strategy).iterator();
-        while(it.hasNext()){
-            desc.add(((Category)it.next()).getDescription());
+        for(ListItem l : this.readCategories()){
+            Category temp = (Category)l;
+            desc.add(temp.getDescription());
+            System.out.println("added description by 1");
         }
         return desc;
     }

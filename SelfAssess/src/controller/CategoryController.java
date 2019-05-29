@@ -31,6 +31,7 @@ public class CategoryController {
         try {
             categoryOverviewPane.getTable().getItems().addAll(databaseService.getCategoryDescriptions());
         } catch (NullPointerException e) {
+            e.fillInStackTrace();
             System.out.println("No categories yet");
         }
 
@@ -51,6 +52,7 @@ public class CategoryController {
             try {
                 categoryDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
             } catch (NullPointerException e) {
+                e.fillInStackTrace();
                 System.out.println("No Category names yet");
             }
             stage.show();
@@ -114,6 +116,7 @@ public class CategoryController {
             try {
                 categoryDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
             } catch (NullPointerException e) {
+                e.fillInStackTrace();
                 System.out.println("No Category names yet");
             }
             stage.show();
@@ -140,6 +143,7 @@ public class CategoryController {
             try {
                 categoryOverviewPane.getTable().getItems().addAll(databaseService.getCategoryDescriptions());
             } catch (NullPointerException e) {
+                e.fillInStackTrace();
                 System.out.println("No categories yet");
             }
             stage.close();

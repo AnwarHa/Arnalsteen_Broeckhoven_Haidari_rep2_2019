@@ -1,5 +1,7 @@
 package database;
 import model.ListItem;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleDatabaseFactorySingleton {
@@ -8,25 +10,26 @@ public class SimpleDatabaseFactorySingleton {
 
     }
     public List<ListItem> loadCategories(String strategy){
-        List<ListItem> categories;
+        List<ListItem> categories = new ArrayList<>();
         try {
             Class<?> strat = Class.forName("database." + strategy + "Category" );
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();
-            categories =  o.readData();
+            categories.addAll(o.readData());
         }catch (Exception e){
-            throw new RuntimeException(e.getMessage() + e.fillInStackTrace());
+            //throw new DatabaseException(e.getMessage() +" ("+ e.fillInStackTrace()+")");
         }
         return categories;
     }
 
     public List<ListItem> loadQuestions(String strategy){
         List<ListItem> questions;
+        questions = new ArrayList<>();
         try {
             Class<?> strat = Class.forName("database." + strategy + "Question" );
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();
-            questions =  o.readData();
+            questions.addAll(o.readData());
         }catch (Exception e){
-            throw new RuntimeException(e.getMessage() + e.fillInStackTrace());
+            throw new DatabaseException(e.getMessage() + e.fillInStackTrace());
         }
         return questions;
     }
@@ -37,7 +40,7 @@ public class SimpleDatabaseFactorySingleton {
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();
             o.writeData(items);
         }catch (Exception e){
-            throw new RuntimeException(e.getMessage() + e.fillInStackTrace());
+            throw new DatabaseException(e.getMessage() + e.fillInStackTrace());
         }
     }
 
@@ -47,7 +50,7 @@ public class SimpleDatabaseFactorySingleton {
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();
             o.writeData(items);
         }catch (Exception e){
-            throw new RuntimeException(e.getMessage());
+            throw new DatabaseException(e.getMessage());
         }
     }
 

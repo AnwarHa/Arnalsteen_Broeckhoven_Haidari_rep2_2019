@@ -135,6 +135,7 @@ public class QuestionController {
                 try {
                     questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
                 }catch (NullPointerException e){
+                    e.fillInStackTrace();
                     System.out.println("No Category names yet");
                 }
                 stage.show();
