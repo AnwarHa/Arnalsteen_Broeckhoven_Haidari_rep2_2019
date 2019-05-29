@@ -1,1 +1,2 @@
-Java,programmeertaal
+Git;platform
+Java;programmeertaal

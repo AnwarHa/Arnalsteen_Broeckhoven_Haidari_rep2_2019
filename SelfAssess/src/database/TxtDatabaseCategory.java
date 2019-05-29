@@ -1,9 +1,9 @@
 package database;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import model.Category;
 import model.ListItem;
+
+import java.io.*;
 import java.util.*;
 
 public class TxtDatabaseCategory extends TxtDatabaseStrategy {
@@ -11,41 +11,72 @@ public class TxtDatabaseCategory extends TxtDatabaseStrategy {
         super(System.getProperty("user.dir") + "\\src\\testDatabase\\categories.txt");
     }
 
+
+
+
     @Override
-    protected HashMap<Integer, List<String>> objectToStringListInMap() {
-        HashMap<Integer,List<String>> stringMap = new HashMap<>();
-        Iterator it = this.objects.iterator();
-        int i = 0;
-        while(it.hasNext()){
-            List<String> strings = new ArrayList<>();
-            ListItem listItem = (ListItem) it.next();
-            if(listItem instanceof Category){
-                Category category = (Category) listItem;
-                List<String> temp = new ArrayList<>();
-                temp.add(category.getName());
-                temp.add(category.getDescription());
-                if(!this.read().containsValue(temp)){
-                    strings.addAll(temp);
-                }
-            }else{
-                throw new ClassCastException("Wrong class type in list");
+    public List<ListItem> load() {
+        List<ListItem> out = new ArrayList<>();
+        // This will reference one line at a time
+        String line = "";
+
+        try {
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader =
+                    new FileReader(this.path);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader =
+                    new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null) {
+                String[] stringArray = line.split(";");
+                out.add(new Category(stringArray[0],stringArray[1]));
             }
-            stringMap.put(i,strings);
-            i++;
+
+            // Always close files.
+            bufferedReader.close();
         }
-        return stringMap;
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                    "Unable to open file: question.txt");
+        }
+        catch(IOException ex) {
+            System.out.println(
+                    "Error reading file: question.txt");
+            // Or we could just do this:
+            // ex.printStackTrace();
+        }
+        return out;
     }
-
-
 
     @Override
-    protected void stringToObject(HashMap<Integer, List<String>> readedMap) {
-        ObservableList<Observable> categories = FXCollections.observableArrayList(new ArrayList<>());
-        for(Map.Entry<Integer,List<String>> entry: readedMap.entrySet()) {
-            List<String> list = entry.getValue();
-            objects.add(new Category(list.get(0),list.get(1)));
+    public void update(List<ListItem> items) {
+        try {
+            // Assume default encoding.
+            FileWriter fileWriter =
+                    new FileWriter(this.path);
+
+            // Always wrap FileWriter in BufferedWriter.
+            BufferedWriter bufferedWriter =
+                    new BufferedWriter(fileWriter);
+
+            // Note that write() does not automatically
+            // append a newline character.
+            for(ListItem l : items){
+                Category temp = (Category)l;
+                bufferedWriter.write(temp.getName()+";"+temp.getDescription());
+                bufferedWriter.newLine();
+            }
+            // Always close files.
+            bufferedWriter.close();
+        }
+        catch(IOException ex) {
+            System.out.println(
+                    "Error writing categories: " + ex.getMessage());
+            // Or we could just do this:
+            // ex.printStackTrace();
         }
     }
-
 
 }

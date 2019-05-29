@@ -12,12 +12,12 @@ public abstract class RamDatabaseStrategy implements DatabaseStrategy {
     }
 
     @Override
-    public List<ListItem> readData() {
+    public List<ListItem> load() {
         return items;
     }
 
     @Override
-    public void writeData(List<ListItem> o) {
+    public void update(List<ListItem> o) {
         this.items.addAll(o);
     }
 }

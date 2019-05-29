@@ -1,5 +1,9 @@
 package database;
+import model.Category;
+import model.ListItem;
 import model.Question;
+
+import java.io.*;
 import java.util.*;
 
 public class TxtDatabaseQuestion extends TxtDatabaseStrategy{
@@ -9,38 +13,70 @@ public class TxtDatabaseQuestion extends TxtDatabaseStrategy{
     }
 
     @Override
-    public HashMap<Integer,List<String>> objectToStringListInMap () {
-        HashMap<Integer,List<String>> stringMap = new HashMap<>();
-        int i = 0;
-        for(Object q : this.objects){
-            List<String> strings = new ArrayList<>();
-            if(q instanceof Question){
-                Question question = (Question) q;
-                strings.add(question.getName());
-                strings.add(question.getCategory());
-                strings.add(question.getFeedback());
-                strings.addAll(question.getStatements());
-            }else{
-                throw new ClassCastException("Wrong class type in list");
+    public List<ListItem> load() {
+        List<ListItem> out = new ArrayList<>();
+        // This will reference one line at a time
+        String line = "";
+
+        try {
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader =
+                    new FileReader(this.path);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader =
+                    new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null) {
+                List<String> stringList = new ArrayList<>();
+                stringList.addAll(Arrays.asList(line.split(";")));
+                List<String> subList = stringList.subList(3,stringList.size());
+                out.add(new Question(stringList.get(0),stringList.get(1),subList,stringList.get(2)));
             }
-            stringMap.put(i,strings);
-            i++;
+
+            // Always close files.
+            bufferedReader.close();
         }
-        return stringMap;
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                    "Unable to open file: question.txt");
+        }
+        catch(IOException ex) {
+            System.out.println(
+                    "Error reading file: question.txt");
+            // Or we could just do this:
+            // ex.printStackTrace();
+        }
+        return out;
     }
 
-
-
     @Override
-    public void stringToObject(HashMap<Integer,List<String>> readedMap) {
-        for(Map.Entry<Integer,List<String>> entry: readedMap.entrySet()){
-            List<String> list = entry.getValue();
-            List<String> answers = new ArrayList<>();
+    public void update(List<ListItem> items) {
+        try {
+            // Assume default encoding.
+            FileWriter fileWriter =
+                    new FileWriter(this.path);
 
-            for(int i = 3; i < list.size(); i++) answers.add(list.get(i));
+            // Always wrap FileWriter in BufferedWriter.
+            BufferedWriter bufferedWriter =
+                    new BufferedWriter(fileWriter);
 
-            objects.add(new Question(list.get(0),list.get(1),answers,list.get(2)));
+            // Note that write() does not automatically
+            // append a newline character.
+            for(ListItem l : items){
+                Question temp = (Question) l;
+                bufferedWriter.write(temp.getName()+";"+temp.getCategory()+";"+temp.getFeedback());
+                for(String statement : temp.getStatements())bufferedWriter.write(";"+statement);
+                bufferedWriter.newLine();
+            }
+            // Always close files.
+            bufferedWriter.close();
         }
-
+        catch(IOException ex) {
+            System.out.println(
+                    "Error writing categories: " + ex.getMessage());
+            // Or we could just do this:
+            // ex.printStackTrace();
+        }
     }
 }

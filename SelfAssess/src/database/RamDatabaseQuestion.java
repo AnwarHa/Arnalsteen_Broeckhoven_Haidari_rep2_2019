@@ -7,8 +7,5 @@ public class RamDatabaseQuestion extends RamDatabaseStrategy {
         super();
     }
 
-    @Override
-    public void writeData(List<ListItem> o) {
 
-    }
 }

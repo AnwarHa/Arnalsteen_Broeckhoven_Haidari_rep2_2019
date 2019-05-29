@@ -47,7 +47,7 @@ public class Main extends Application {
 				reader.close();
 			}*/
 
-			//hier moet de strategy in komen via de properties file
+			//hier moet de strategy in komen via de properties path
 			DatabaseService databaseService = new DatabaseService("TxtDatabase");
 			List<String> statementstest = new ArrayList<>();
 			statementstest.add("juiste antwoord");

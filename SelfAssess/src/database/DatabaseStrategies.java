@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum DatabaseStrategies {
-    INRAM("RamDatabase","in memory"),INTXT("TxtDatabase","in text file");
+    INRAM("RamDatabase","in memory"),INTXT("TxtDatabase","in text path");
 
 
     DatabaseStrategies(String className, String name) {

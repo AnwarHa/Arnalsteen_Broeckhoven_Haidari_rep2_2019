@@ -14,7 +14,7 @@ public class SimpleDatabaseFactorySingleton {
         try {
             Class<?> strat = Class.forName("database." + strategy + "Category" );
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();
-            categories.addAll(o.readData());
+            categories.addAll(o.load());
         }catch (Exception e){
             //throw new DatabaseException(e.getMessage() +" ("+ e.fillInStackTrace()+")");
         }
@@ -27,7 +27,7 @@ public class SimpleDatabaseFactorySingleton {
         try {
             Class<?> strat = Class.forName("database." + strategy + "Question" );
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();
-            questions.addAll(o.readData());
+            questions.addAll(o.load());
         }catch (Exception e){
             throw new DatabaseException(e.getMessage() + e.fillInStackTrace());
         }
@@ -38,7 +38,7 @@ public class SimpleDatabaseFactorySingleton {
         try {
             Class<?> strat = Class.forName("database." + strategy + "Question" );
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();
-            o.writeData(items);
+            o.update(items);
         }catch (Exception e){
             throw new DatabaseException(e.getMessage() + e.fillInStackTrace());
         }
@@ -48,7 +48,7 @@ public class SimpleDatabaseFactorySingleton {
         try {
             Class<?> strat = Class.forName("database." + strategy + "Category" );
             DatabaseStrategy o =(DatabaseStrategy)strat.getConstructor().newInstance();
-            o.writeData(items);
+            o.update(items);
         }catch (Exception e){
             throw new DatabaseException(e.getMessage());
         }
