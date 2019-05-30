@@ -3,7 +3,6 @@ package database;
 import model.Category;
 import model.ListItem;
 import model.Question;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;

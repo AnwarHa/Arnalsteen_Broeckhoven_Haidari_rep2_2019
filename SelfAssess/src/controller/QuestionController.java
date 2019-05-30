@@ -127,6 +127,7 @@ public class QuestionController {
         @Override
         public void handle(MouseEvent event) {
             if(questionOpen==false){
+                questionOpen = true;
                 stage = new Stage();
                 Question question = questionOverviewPane.getSelectedRow();
                 answers = FXCollections.observableArrayList();
@@ -185,6 +186,7 @@ public class QuestionController {
                 }
             }
             databaseService.writeQuestions(updatedQuestions);
+            questionOverviewPane.getTable().getItems().setAll(databaseService.readQuestions());
             questionOpen=false;
             stage.close();
         }

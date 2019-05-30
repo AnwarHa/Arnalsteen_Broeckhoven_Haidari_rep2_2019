@@ -1,7 +1,5 @@
 package database;
-
 import model.ListItem;
-
 import java.util.List;
 
 public class DatabaseContext {

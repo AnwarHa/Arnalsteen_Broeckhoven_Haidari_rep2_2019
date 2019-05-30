@@ -4,19 +4,15 @@ import database.DatabaseService;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Question;
 import model.Test;
 import view.panels.MessagePane;
 import view.panels.TestPane;
-
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 public class TestController {
@@ -105,7 +101,7 @@ public class TestController {
         public void handle(ActionEvent event) {
             RadioButton selectedRadioButton = (RadioButton) testPane.getStatementGroup().getSelectedToggle();
             String toggleGroupValue = selectedRadioButton.getText();
-            if (test.checkAnswer(toggleGroupValue) != true) {
+            if (!test.checkAnswer(toggleGroupValue)) {
                 messagePane.getLabel().setText(test.getCurrentQuestion().getFeedback());
                 stage.close();
             } else {
