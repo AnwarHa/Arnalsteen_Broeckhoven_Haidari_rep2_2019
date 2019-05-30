@@ -173,8 +173,16 @@ public class DatabaseService implements Subject {
     public Boolean testIsCompleted(){
         return propertiesDatabase.isTestIsCompleted();
     }
-    public void setIsCompleted(Boolean isCompleted){
+    public void setTestIsCompleted(Boolean isCompleted){
         propertiesDatabase.setIsCompleted(isCompleted);
+    }
+
+    public void setLastTestScores(String scores){
+        propertiesDatabase.setLastTestScores(scores);
+    }
+
+    public String getLastTestScores(){
+        propertiesDatabase.setLastTestScores(scores);
     }
 }
 
