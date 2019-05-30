@@ -14,6 +14,7 @@ import model.Test;
 import view.panels.MessagePane;
 import view.panels.TestPane;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -28,13 +29,22 @@ public class TestController {
 
 
     public TestController(MessagePane messagePane) {
+
         this.messagePane = messagePane;
+
         messagePane.getTestButton().setOnAction(new EvaluateTest());
     }
 
     public void setDatabaseService(DatabaseService databaseService) {
         this.databaseService = databaseService;
         test = new Test(this.databaseService.readQuestions());
+        try {
+            if (databaseService.testIsCompleted() == true) {
+                this.messagePane.getLabel().setText(databaseService.getLastTestScores());
+            }
+        }catch (NullPointerException e){
+            this.messagePane.getLabel().setText("You never did this evaluation");
+        }
 
     }
 
@@ -49,9 +59,6 @@ public class TestController {
             if (updated == false) {
                 test.setQuestions(databaseService.readQuestions());
                 updated = true;
-            }
-            if (databaseService.testIsCompleted() == true) {
-                messagePane.getLabel().setText(databaseService.getLastTestScores());
             }
             try {
                 Question question = test.findNextQuestion();
@@ -68,8 +75,16 @@ public class TestController {
                 stage.show();
             } catch (NullPointerException e) {
                 messagePane.getLabel().setText(test.printResults());
-                databaseService.setTestIsCompleted(true);
-                databaseService.setLastTestScores(test.printResults());
+                try {
+                    databaseService.setTestIsCompleted(true);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                try {
+                    databaseService.setLastTestScores(test.printResults());
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
 
             }
         }

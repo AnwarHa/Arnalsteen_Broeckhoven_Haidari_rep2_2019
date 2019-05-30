@@ -30,7 +30,7 @@ public class MessagePane extends GridPane {
         this.setVgap(5);
         this.setHgap(5);
 
-        label = new Label("You never did this evaluation");
+        label = new Label();
 		add(label, 0, 0);
 		testButton = new Button("Evaluate");
 		add(testButton, 0,2,1,1);

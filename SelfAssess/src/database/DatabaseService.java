@@ -2,6 +2,9 @@ package database;
 import model.Category;
 import model.ListItem;
 import model.Question;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,7 +14,7 @@ public class DatabaseService{
     private PropertiesDatabase propertiesDatabase;
     private String strategy;
 
-    public DatabaseService() {
+    public DatabaseService() throws FileNotFoundException {
         propertiesDatabase = new PropertiesDatabase(System.getProperty("user.dir") + "\\src\\testDatabase\\evaluation.properties");
         setStrategy(propertiesDatabase.getDatabaseType());
         setDatabaseContext();
@@ -149,11 +152,11 @@ public class DatabaseService{
     public Boolean testIsCompleted(){
         return propertiesDatabase.isTestIsCompleted();
     }
-    public void setTestIsCompleted(Boolean isCompleted){
+    public void setTestIsCompleted(Boolean isCompleted) throws IOException {
         propertiesDatabase.setIsCompleted(isCompleted);
     }
 
-    public void setLastTestScores(String scores){
+    public void setLastTestScores(String scores) throws IOException {
         propertiesDatabase.setLastTestScores(scores);
     }
 
