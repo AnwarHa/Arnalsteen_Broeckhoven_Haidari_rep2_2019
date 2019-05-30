@@ -1,6 +1,4 @@
 package view.panels;
-
-import com.sun.rowset.internal.Row;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

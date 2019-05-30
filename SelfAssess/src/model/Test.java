@@ -1,7 +1,5 @@
 package model;
 
-import controller.Observer;
-
 import java.util.*;
 
 public class Test{

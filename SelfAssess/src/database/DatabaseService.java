@@ -1,5 +1,4 @@
 package database;
-import controller.Observer;
 import model.Category;
 import model.ListItem;
 import model.Question;
@@ -7,12 +6,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class DatabaseService implements Subject {
+public class DatabaseService{
     private DatabaseContext databaseContext;
     private PropertiesDatabase propertiesDatabase;
     private String strategy;
-    private List<Observer> observers;
-
 
     public DatabaseService() {
         propertiesDatabase = new PropertiesDatabase(System.getProperty("user.dir") + "\\src\\testDatabase\\evaluation.properties");
@@ -28,11 +25,7 @@ public class DatabaseService implements Subject {
             this.strategy = strategy;
         }
     }
-
-    public void changeStrategy(String strategy){
-        setStrategy(strategy);
-    }
-
+    
     private void setDatabaseContext() {
         this.databaseContext = new DatabaseContext();
     }
@@ -149,24 +142,7 @@ public class DatabaseService implements Subject {
         return null;
     }
 
-    @Override
-    public void register(Observer o) {
-        if (o != null) {
-            observers.add(o);
-        }
-    }
-
-    @Override
-    public void remove(Observer o) {
-        observers.remove(o);
-    }
-
-    @Override
-    public void notifyObserver() {
-        for(Observer o : observers) o.update();
-    }
-
-    public String getEvaluationType(){
+   public String getEvaluationType(){
         return propertiesDatabase.getEvaluationType();
     }
 

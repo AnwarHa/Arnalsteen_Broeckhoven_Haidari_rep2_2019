@@ -1,2 +1,3 @@
 Git;platform
 Java;programmeertaal
+Testing;debuggen leren
