@@ -1,3 +1,1 @@
-eerste vraag;category1;feedback1;juiste antwoord;fout antwoord 1;fout antwoord 2
-tweede vraag;category2;feedback2;juiste antwoord;fout antwoord 1;fout antwoord 2
-derde vraag;category3;feedback3;juiste antwoord;fout antwoord 1;fout antwoord 2
+Vraag;Git;dom eh;JA;Nee
