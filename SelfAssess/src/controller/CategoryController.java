@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.Category;
 import model.DomainException;
 import model.ListItem;
@@ -21,6 +22,7 @@ public class CategoryController {
     private DatabaseService databaseService;
     private Stage stage;
     private List<Category> categoryList;
+    private Boolean detailPaneOpen = false;
 
     public CategoryController(CategoryOverviewPane categoryOverviewPane) {
         this.categoryOverviewPane = categoryOverviewPane;
@@ -44,20 +46,23 @@ public class CategoryController {
     class OpenDetailPane implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            stage = new Stage();
-            categoryDetailPane = new CategoryDetailPane();
-            Scene scene = new Scene(categoryDetailPane);
-            stage.setScene(scene);
-            try {
-                categoryDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
-            } catch (NullPointerException e) {
-                e.fillInStackTrace();
-                System.out.println("No Category names yet");
+            if(detailPaneOpen == false){
+                detailPaneOpen = true;
+                stage = new Stage();
+                categoryDetailPane = new CategoryDetailPane();
+                Scene scene = new Scene(categoryDetailPane);
+                stage.setScene(scene);
+                try {
+                    categoryDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
+                } catch (NullPointerException e) {
+                    e.fillInStackTrace();
+                    System.out.println("No Category names yet");
+                }
+                stage.initStyle(StageStyle.UNDECORATED);
+                stage.show();
+                categoryDetailPane.setSaveAction(new addCategory());
+                categoryDetailPane.setCancelAction(new cancelCategory());
             }
-            stage.show();
-            categoryDetailPane.setSaveAction(new addCategory());
-            categoryDetailPane.setCancelAction(new cancelCategory());
-
         }
     }
 
@@ -73,12 +78,6 @@ public class CategoryController {
             try {
                 category = new Category(name, description);
 
-            /*} catch (DomainException e) {
-                category = new Category(categoryDetailPane.getCategoryField().getValue().toString(), description);
-            }
-            categoryOverviewPane.getTable().getItems().addAll(category);
-            databaseService.readCategories().add(category);*/
-
 
             } catch (DomainException e) {
                 category = new Category(categoryDetailPane.getCategoryField().getValue().toString(), description);
@@ -88,6 +87,7 @@ public class CategoryController {
             databaseService.writeCategories(categoryList);
 
             stage.close();
+            detailPaneOpen = false;
         }
     }
 
@@ -96,6 +96,7 @@ public class CategoryController {
         @Override
         public void handle(ActionEvent event) {
             stage.close();
+            detailPaneOpen = false;
         }
     }
 
@@ -103,22 +104,27 @@ public class CategoryController {
 
         @Override
         public void handle(MouseEvent event) {
-            stage = new Stage();
-            categoryDetailPane = new CategoryDetailPane();
-            Category category = categoryOverviewPane.getSelectedRow();
-            categoryDetailPane.setTitleField(category.getName());
-            categoryDetailPane.setDescriptionField(category.getDescription());
-            Scene scene = new Scene(categoryDetailPane);
-            stage.setScene(scene);
-            try {
-                categoryDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
-            } catch (NullPointerException e) {
-                e.fillInStackTrace();
-                System.out.println("No Category names yet");
-            }
-            stage.show();
+            if(detailPaneOpen == false){
+                detailPaneOpen = true;
+                stage = new Stage();
+                categoryDetailPane = new CategoryDetailPane();
+                Category category = categoryOverviewPane.getSelectedRow();
+                categoryDetailPane.setTitleField(category.getName());
+                categoryDetailPane.setDescriptionField(category.getDescription());
+                Scene scene = new Scene(categoryDetailPane);
+                stage.setScene(scene);
+                try {
+                    categoryDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
+                } catch (NullPointerException e) {
+                    e.fillInStackTrace();
+                    System.out.println("No Category names yet");
+                }
+                stage.initStyle(StageStyle.UNDECORATED);
+                stage.show();
 
-            categoryDetailPane.setSaveAction(new editCategory(category));
+                categoryDetailPane.setSaveAction(new editCategory(category));
+                categoryDetailPane.setCancelAction(new cancelCategory());
+            }
         }
     }
 
@@ -143,6 +149,7 @@ public class CategoryController {
                 e.fillInStackTrace();
                 System.out.println("No categories yet");
             }
+            detailPaneOpen = false;
             stage.close();
         }
     }
