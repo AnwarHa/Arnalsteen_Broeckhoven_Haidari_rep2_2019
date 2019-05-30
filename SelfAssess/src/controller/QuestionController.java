@@ -176,10 +176,6 @@ public class QuestionController {
             question.setCategory(category);
             question.setFeedback(feedback);
             question.setStatements(statements);
-<<<<<<< HEAD
-=======
-
->>>>>>> master
             List<Question> updatedQuestions = new ArrayList<>();
             for (Iterator it = questionOverviewPane.getTable().getItems().iterator(); it.hasNext(); ) {
                 Object q = it.next();

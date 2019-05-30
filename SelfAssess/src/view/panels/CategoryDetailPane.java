@@ -7,7 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+
+import java.awt.*;
 
 public class CategoryDetailPane extends GridPane{
     private Button btnOK, btnCancel;
@@ -18,6 +21,7 @@ public class CategoryDetailPane extends GridPane{
         this.setPrefHeight(150);
         this.setPrefWidth(300);
 
+        this.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
         this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
