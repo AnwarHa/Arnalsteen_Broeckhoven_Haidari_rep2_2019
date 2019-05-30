@@ -8,13 +8,12 @@ import java.util.Properties;
 
 public class PropertiesDatabase {
     private Properties properties;
-    private String propsFileName = System.getProperty("user.dir") + "\\src\\testDatabase\\evaluation.properties";
+    private String path;
     FileOutputStream output;
 
     public PropertiesDatabase(String path) throws FileNotFoundException {
         properties = new Properties();
         setProperties(path);
-        output = new FileOutputStream(propsFileName);
     }
 
     private String setFirstCharUppercase(String s) {
@@ -26,6 +25,7 @@ public class PropertiesDatabase {
 
         try {
             //load a properties file from class path, inside static method
+            this.path = path;
             this.properties.load(new FileInputStream(path));
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -44,13 +44,16 @@ public class PropertiesDatabase {
         return Boolean.parseBoolean(setFirstCharUppercase(properties.getProperty("testIsCompleted")));
     }
 
-    public void setIsCompleted(Boolean isCompleted) throws IOException {
+    public void setIsCompleted(Boolean isCompleted) {
         this.properties.setProperty("testIsCompleted", isCompleted.toString());
     }
 
     public void setLastTestScores(String scores) throws IOException {
         this.properties.setProperty("lastTestScore", scores);
-        this.properties.save(output, null);
+        output = new FileOutputStream(path);
+        this.properties.store(output, null);
+        output.flush();
+        output.close();
     }
 
     public String getLastTestScores() {
