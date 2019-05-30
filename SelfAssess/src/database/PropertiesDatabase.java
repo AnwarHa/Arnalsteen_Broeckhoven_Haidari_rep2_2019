@@ -41,11 +41,12 @@ public class PropertiesDatabase {
     }
 
     public void setIsCompleted(Boolean isCompleted) {
-        this.properties.setProperty("testIsCompleted",isCompleted.toString());
+        this.properties.replace("testIsCompleted",isCompleted.toString());
     }
 
     public void setLastTestScores(String scores){
-        this.properties.setProperty("lastTestScore", scores);
+        this.properties.replace("lastTestScore", scores);
+        //this.properties.setProperty();
     }
 
     public String getLastTestScores(){
