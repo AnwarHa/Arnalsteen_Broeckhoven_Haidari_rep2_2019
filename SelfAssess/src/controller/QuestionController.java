@@ -11,6 +11,9 @@ import model.Question;
 import database.*;
 import view.panels.QuestionDetailPane;
 import view.panels.QuestionOverviewPane;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -169,7 +172,17 @@ public class QuestionController {
             question.setCategory(category);
             question.setFeedback(feedback);
             question.setStatements(statements);
-            questionOverviewPane.getTable().getItems().setAll(databaseService.readQuestions());
+
+            //questionOverviewPane.getTable().getItems().setAll(databaseService.readQuestions());
+            List<Question> updatedQuestions = new ArrayList<>();
+            for (Iterator it = questionOverviewPane.getTable().getItems().iterator(); it.hasNext(); ) {
+                Object q = it.next();
+                if(q instanceof Question){
+                    Question quest = (Question) q;
+                    updatedQuestions.add(quest);
+                }
+            }
+            databaseService.writeQuestions(updatedQuestions);
             stage.close();
         }
     }
