@@ -39,8 +39,8 @@ public class TestController {
         this.databaseService = databaseService;
         test = new Test(this.databaseService.readQuestions());
         try {
-            if (databaseService.testIsCompleted() == true) {
-                this.messagePane.getLabel().setText(this.databaseService.getLastTestScores());
+            if (databaseService.testIsCompleted()) {
+                this.messagePane.getLabel().setText("You already completed this test\n\n"+ this.databaseService.getLastTestScores());
             } else {
                 this.messagePane.getLabel().setText("You never did this evaluation");
             }
@@ -104,7 +104,7 @@ public class TestController {
         public void handle(ActionEvent event) {
             RadioButton selectedRadioButton = (RadioButton) testPane.getStatementGroup().getSelectedToggle();
             String toggleGroupValue = selectedRadioButton.getText();
-            if (test.checkAnswer(toggleGroupValue) != true) {
+            if (!test.checkAnswer(toggleGroupValue)) {
                 messagePane.getLabel().setText(test.getCurrentQuestion().getFeedback());
                 stage.close();
             } else {
