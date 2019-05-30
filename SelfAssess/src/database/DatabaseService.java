@@ -9,13 +9,16 @@ import java.util.List;
 
 public class DatabaseService implements Subject {
     private DatabaseContext databaseContext;
+    private PropertiesDatabase propertiesDatabase;
     private String strategy;
     private List<Observer> observers;
 
 
-    public DatabaseService(String strategy) {
-        setStrategy(strategy);
+    public DatabaseService() {
+        propertiesDatabase = new PropertiesDatabase(System.getProperty("user.dir") + "\\src\\testDatabase\\evaluation.properties");
+        setStrategy(propertiesDatabase.getDatabaseType());
         setDatabaseContext();
+
     }
 
     private void setStrategy(String strategy){
@@ -161,6 +164,17 @@ public class DatabaseService implements Subject {
     @Override
     public void notifyObserver() {
         for(Observer o : observers) o.update();
+    }
+
+    public String getEvaluationType(){
+        return propertiesDatabase.getEvaluationType();
+    }
+
+    public Boolean testIsCompleted(){
+        return propertiesDatabase.isTestIsCompleted();
+    }
+    public void setIsCompleted(Boolean isCompleted){
+        propertiesDatabase.setIsCompleted(isCompleted);
     }
 }
 
