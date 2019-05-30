@@ -46,21 +46,6 @@ public class QuestionController {
         }
     }
 
-    public List<String> getShuffledStatements(Question question) {
-
-        List<String> shuffled = databaseService.getQuestionStatements(question);
-        Collections.shuffle(shuffled);
-        return shuffled;
-    }
-
-    public List<Question> getQuestions() {
-        return databaseService.readQuestions();
-    }
-
-    public List<String> getDescription() {
-        return databaseService.getCategoryDescriptions();
-    }
-
     class OpenDetailPane implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
@@ -89,24 +74,6 @@ public class QuestionController {
         }
     }
 
-    class AddStatementEditListener implements EventHandler<ActionEvent> {
-        Question question;
-
-        AddStatementEditListener(Question q) {
-            this.question = q;
-        }
-
-        @Override
-        public void handle(ActionEvent event) {
-            if (answers == null) {
-                answers.addAll(question.getStatements());
-            }
-            answers.add(questionDetailPane.getStatementField().getText());
-            questionDetailPane.getStatementsArea().setItems(answers);
-            questionDetailPane.getStatementField().clear();
-        }
-    }
-
     class RemoveStatementListener implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent e) {
@@ -122,32 +89,7 @@ public class QuestionController {
         }
     }
 
-    class RemoveStatementEditListener implements EventHandler<ActionEvent> {
-        Question question;
 
-        RemoveStatementEditListener(Question q) {
-            this.question = q;
-        }
-
-        @Override
-        public void handle(ActionEvent event) {
-            if (answers == null) {
-                answers.addAll(question.getStatements());
-            }
-            System.out.println(answers);
-            Iterator<String> it = answers.iterator();
-            teVerwijderen = questionDetailPane.getStatementsArea().getSelectionModel().getSelectedItems();
-            while (it.hasNext()) {
-                String word = it.next();
-                if (word.equals(teVerwijderen.get(0))) {
-                    it.remove();
-                    break;
-                }
-            }
-            questionDetailPane.setStatementsArea(answers);
-            System.out.println(answers);
-        }
-    }
 
     class CancelQuestion implements EventHandler<ActionEvent> {
 
@@ -178,16 +120,20 @@ public class QuestionController {
         @Override
         public void handle(MouseEvent event) {
             stage = new Stage();
-            questionDetailPane = new QuestionDetailPane();
             Question question = questionOverviewPane.getSelectedRow();
+            answers = FXCollections.observableArrayList();
+            answers.addAll(question.getStatements());
+            questionDetailPane = new QuestionDetailPane();
+            System.out.println(answers);
             questionDetailPane.setQuestionField(question.getName());
-            questionDetailPane.setStatementsArea(question.getStatements());
+            questionDetailPane.setStatementsArea(answers);
             questionDetailPane.setFeedbackField(question.getFeedback());
             //questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
             questionDetailPane.setCategoryField(question.getCategory());
             Scene scene = new Scene(questionDetailPane);
             stage.setScene(scene);
             try {
+
                 questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
             } catch (NullPointerException e) {
                 e.fillInStackTrace();
@@ -226,8 +172,53 @@ public class QuestionController {
             question.setCategory(category);
             question.setFeedback(feedback);
             question.setStatements(statements);
-            questionOverviewPane.getTable().getItems().addAll(databaseService.readQuestions());
+            questionOverviewPane.getTable().getItems().setAll(databaseService.readQuestions());
             stage.close();
+        }
+    }
+    class AddStatementEditListener implements EventHandler<ActionEvent> {
+        Question question;
+
+        AddStatementEditListener(Question q) {
+            this.question = q;
+        }
+
+        @Override
+        public void handle(ActionEvent event) {
+            if (answers == null) {
+                answers = FXCollections.observableArrayList();
+                answers.addAll(question.getStatements());
+            }
+            answers.add(questionDetailPane.getStatementField().getText());
+            questionDetailPane.getStatementsArea().setItems(answers);
+            questionDetailPane.getStatementField().clear();
+        }
+    }
+    class RemoveStatementEditListener implements EventHandler<ActionEvent> {
+        Question question;
+
+        RemoveStatementEditListener(Question q) {
+            this.question = q;
+        }
+
+        @Override
+        public void handle(ActionEvent event) {
+            if (answers == null) {
+                answers = FXCollections.observableArrayList();
+                answers.addAll(question.getStatements());
+            }
+            System.out.println(answers);
+            Iterator<String> it = answers.iterator();
+            teVerwijderen = questionDetailPane.getStatementsArea().getSelectionModel().getSelectedItems();
+            while (it.hasNext()) {
+                String word = it.next();
+                if (word.equals(teVerwijderen.get(0))) {
+                    it.remove();
+                    break;
+                }
+            }
+            questionDetailPane.setStatementsArea(answers);
+            System.out.println(answers);
         }
     }
 }
