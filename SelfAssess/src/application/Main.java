@@ -30,22 +30,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 
-		try {/*
-			BufferedReader reader = new BufferedReader(new FileReader("D:\\Informatica\\Fase 2\\OOO\\repository\\Groepsopdracht_OOO\\Arnalsteen_Broeckhoven_Haidari_rep2_2019\\SelfAssess\\src\\testDatabase\\categories.txt"));
-			String         line = null;
-			StringBuilder  stringBuilder = new StringBuilder();
-			String         ls = System.getProperty("line.separator");
-
-			try {
-				while((line = reader.readLine()) != null) {
-					stringBuilder.append(line);
-					stringBuilder.append(ls);
-				}
-
-				System.out.println(stringBuilder.toString());
-			} finally {
-				reader.close();
-			}*/
+		try {
 
 			//hier moet de strategy in komen via de properties path
 			DatabaseService databaseService = new DatabaseService("TxtDatabase");

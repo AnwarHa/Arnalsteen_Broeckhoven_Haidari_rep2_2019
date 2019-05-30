@@ -1,4 +1,5 @@
 package database;
+import controller.Observer;
 import model.Category;
 import model.ListItem;
 import model.Question;
@@ -6,9 +7,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class DatabaseService {
+public class DatabaseService implements Subject {
     private DatabaseContext databaseContext;
     private String strategy;
+    private List<Observer> observers;
 
 
     public DatabaseService(String strategy) {
@@ -145,6 +147,23 @@ public class DatabaseService {
             if(out != null)break;
         }
         return null;
+    }
+
+    @Override
+    public void register(Observer o) {
+        if (o != null) {
+            observers.add(o);
+        }
+    }
+
+    @Override
+    public void remove(Observer o) {
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyObserver() {
+        for(Observer o : observers) o.update();
     }
 }
 

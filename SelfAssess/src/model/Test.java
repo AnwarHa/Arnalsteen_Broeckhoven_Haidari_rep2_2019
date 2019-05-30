@@ -1,8 +1,10 @@
 package model;
 
+import controller.Observer;
+
 import java.util.*;
 
-public class Test implements Observer{
+public class Test implements Observer {
     private List<Question> questions;
     private List<Question> askedQuestions;
     private List<String> feedback;

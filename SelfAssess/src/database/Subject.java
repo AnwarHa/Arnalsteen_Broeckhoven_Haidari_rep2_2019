@@ -1,4 +1,6 @@
-package model;
+package database;
+
+import controller.Observer;
 
 public interface Subject {
 
