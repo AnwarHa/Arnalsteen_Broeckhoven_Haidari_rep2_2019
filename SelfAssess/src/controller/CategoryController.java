@@ -20,7 +20,7 @@ public class CategoryController {
     private CategoryDetailPane categoryDetailPane;
     private DatabaseService databaseService;
     private Stage stage;
-    private List<Category> categories;
+    private List<Category> categoryList;
 
     public CategoryController(CategoryOverviewPane categoryOverviewPane) {
         this.categoryOverviewPane = categoryOverviewPane;
@@ -32,6 +32,7 @@ public class CategoryController {
 
     public void setDatabaseService(DatabaseService databaseService) {
         this.databaseService = databaseService;
+        categoryList = databaseService.readCategories();
         try {
             this.categoryOverviewPane.getTable().getItems().addAll(this.databaseService.readCategories());
         } catch (NullPointerException e) {
@@ -83,10 +84,8 @@ public class CategoryController {
                 category = new Category(categoryDetailPane.getCategoryField().getValue().toString(), description);
             }
             categoryOverviewPane.getTable().getItems().addAll(category);
-            List<Category> categoryList = databaseService.readCategories();
             categoryList.add(category);
             databaseService.writeCategories(categoryList);
-            databaseService.readCategories().add(category);
 
             stage.close();
         }

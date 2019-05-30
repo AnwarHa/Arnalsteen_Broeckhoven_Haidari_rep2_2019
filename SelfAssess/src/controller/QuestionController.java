@@ -1,4 +1,5 @@
 package controller;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,8 +37,9 @@ public class QuestionController {
 
     public void setDatabaseService(DatabaseService databaseService) {
         this.databaseService = databaseService;
+        questions = databaseService.readQuestions();
         try {
-            this.questionOverviewPane.getTable().getItems().setAll(this.databaseService.readQuestions());
+            this.questionOverviewPane.getTable().getItems().addAll(this.databaseService.readQuestions());
         } catch (NullPointerException e) {
             e.fillInStackTrace();
             System.out.println("No categories yet");
@@ -87,15 +89,16 @@ public class QuestionController {
         }
     }
 
-    class AddStatementEditListener implements EventHandler<ActionEvent>{
+    class AddStatementEditListener implements EventHandler<ActionEvent> {
         Question question;
-        AddStatementEditListener(Question q){
+
+        AddStatementEditListener(Question q) {
             this.question = q;
         }
 
         @Override
-        public void handle(ActionEvent event){
-            if(answers==null){
+        public void handle(ActionEvent event) {
+            if (answers == null) {
                 answers.addAll(question.getStatements());
             }
             answers.add(questionDetailPane.getStatementField().getText());
@@ -119,14 +122,16 @@ public class QuestionController {
         }
     }
 
-    class RemoveStatementEditListener implements EventHandler<ActionEvent>{
+    class RemoveStatementEditListener implements EventHandler<ActionEvent> {
         Question question;
-        RemoveStatementEditListener(Question q){
+
+        RemoveStatementEditListener(Question q) {
             this.question = q;
         }
+
         @Override
         public void handle(ActionEvent event) {
-            if(answers==null){
+            if (answers == null) {
                 answers.addAll(question.getStatements());
             }
             System.out.println(answers);
@@ -156,11 +161,10 @@ public class QuestionController {
 
         @Override
         public void handle(ActionEvent event) {
-            String question = questionDetailPane.getQuestionField().getText();
+            String name = questionDetailPane.getQuestionField().getText();
             String category = questionDetailPane.getCategoryField().getValue().toString();
             String feedback = questionDetailPane.getFeedbackField().getText();
-            Question questionObject = new Question(question, category, answers, feedback);
-            questions = databaseService.readQuestions();
+            Question questionObject = new Question(name, category, answers, feedback);
             questions.add(questionObject);
             databaseService.writeQuestions(questions);
             questionOverviewPane.getTable().getItems().addAll(questionObject);
@@ -168,60 +172,63 @@ public class QuestionController {
 
         }
     }
-    class OpenDetailPaneEdit implements EventHandler<MouseEvent>{
 
-            @Override
-            public void handle(MouseEvent event) {
-                stage = new Stage();
-                questionDetailPane = new QuestionDetailPane();
-                Question question = questionOverviewPane.getSelectedRow();
-                questionDetailPane.setQuestionField(question.getName());
-                questionDetailPane.setStatementsArea(question.getStatements());
-                questionDetailPane.setFeedbackField(question.getFeedback());
-                //questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
-                questionDetailPane.setCategoryField(question.getCategory());
-                Scene scene = new Scene(questionDetailPane);
-                stage.setScene(scene);
-                try {
-                    questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
-                }catch (NullPointerException e){
-                    e.fillInStackTrace();
-                    System.out.println("No Category names yet");
-                }
-                stage.show();
+    class OpenDetailPaneEdit implements EventHandler<MouseEvent> {
 
-                questionDetailPane.setSaveAction(new editQuestion(question));
-                questionDetailPane.getBtnAdd().setOnAction(new AddStatementEditListener(question));
-                questionDetailPane.getBtnRemove().setOnAction(new RemoveStatementEditListener(question));
-                questionDetailPane.getBtnCancel().setOnAction(new CancelQuestion());
-
+        @Override
+        public void handle(MouseEvent event) {
+            stage = new Stage();
+            questionDetailPane = new QuestionDetailPane();
+            Question question = questionOverviewPane.getSelectedRow();
+            questionDetailPane.setQuestionField(question.getName());
+            questionDetailPane.setStatementsArea(question.getStatements());
+            questionDetailPane.setFeedbackField(question.getFeedback());
+            //questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
+            questionDetailPane.setCategoryField(question.getCategory());
+            Scene scene = new Scene(questionDetailPane);
+            stage.setScene(scene);
+            try {
+                questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
+            } catch (NullPointerException e) {
+                e.fillInStackTrace();
+                System.out.println("No Category names yet");
             }
-        }
+            stage.show();
 
-        class editQuestion implements EventHandler<ActionEvent>{
-            Question question;
-            editQuestion(Question q){
+            questionDetailPane.setSaveAction(new editQuestion(question));
+            questionDetailPane.getBtnAdd().setOnAction(new AddStatementEditListener(question));
+            questionDetailPane.getBtnRemove().setOnAction(new RemoveStatementEditListener(question));
+            questionDetailPane.getBtnCancel().setOnAction(new CancelQuestion());
 
-                this.question = q;
-            }
-            @Override
-            public void handle(ActionEvent event) {
-                //String correctAnswer = answers.get(0);
-                String qu = questionDetailPane.getQuestionField().getText();
-                String category = questionDetailPane.getCategoryField().getValue().toString();
-                String feedback = questionDetailPane.getFeedbackField().getText();
-                System.out.println(qu);
-                System.out.println(category);
-                System.out.println(feedback);
-                //question.setCorrectAnswer(correctAnswer);
-                ObservableList<String>statements = questionDetailPane.getStatementsArea().getItems();
-                question.setQuestion(qu);
-                question.setCategory(category);
-                question.setFeedback(feedback);
-                question.setStatements(statements);
-                questionOverviewPane.getTable().getItems().addAll(databaseService.readQuestions());
-                stage.close();
-            }
         }
     }
+
+    class editQuestion implements EventHandler<ActionEvent> {
+        Question question;
+
+        editQuestion(Question q) {
+
+            this.question = q;
+        }
+
+        @Override
+        public void handle(ActionEvent event) {
+            //String correctAnswer = answers.get(0);
+            String qu = questionDetailPane.getQuestionField().getText();
+            String category = questionDetailPane.getCategoryField().getValue().toString();
+            String feedback = questionDetailPane.getFeedbackField().getText();
+            System.out.println(qu);
+            System.out.println(category);
+            System.out.println(feedback);
+            //question.setCorrectAnswer(correctAnswer);
+            ObservableList<String> statements = questionDetailPane.getStatementsArea().getItems();
+            question.setQuestion(qu);
+            question.setCategory(category);
+            question.setFeedback(feedback);
+            question.setStatements(statements);
+            questionOverviewPane.getTable().getItems().addAll(databaseService.readQuestions());
+            stage.close();
+        }
+    }
+}
 
