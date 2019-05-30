@@ -5,11 +5,10 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertiesDatabase {
-    private String databaseType,evaluationType;
-    private boolean testIsCompleted;
-    private String path;
+    private Properties properties;
 
     public PropertiesDatabase(String path) {
+        properties = new Properties();
         setProperties(path);
     }
 
@@ -19,17 +18,10 @@ public class PropertiesDatabase {
     }
 
     private void setProperties(String path){
-        this.path = path;
-        Properties prop = new Properties();
+
         try {
             //load a properties file from class path, inside static method
-            prop.load(new FileInputStream(path));
-
-            //get the property value
-            this.evaluationType = setFirstCharUppercase(prop.getProperty("evaluation"));
-            this.databaseType =  setFirstCharUppercase(prop.getProperty("fileType"));
-            this.testIsCompleted = Boolean.parseBoolean( setFirstCharUppercase(prop.getProperty("testIsCompleted")));
-
+            this.properties.load(new FileInputStream(path));
         }
         catch (IOException ex) {
             ex.printStackTrace();
@@ -37,18 +29,18 @@ public class PropertiesDatabase {
     }
 
     public String getDatabaseType() {
-        return databaseType+"Database";
+        return setFirstCharUppercase(properties.getProperty("fileType"))+"Database";
     }
 
     public String getEvaluationType() {
-        return evaluationType;
+        return setFirstCharUppercase(properties.getProperty("evaluation"));
     }
 
     public boolean isTestIsCompleted() {
-        return testIsCompleted;
+        return Boolean.parseBoolean( setFirstCharUppercase(properties.getProperty("testIsCompleted")));
     }
 
     public void setIsCompleted(Boolean isCompleted) {
-        this.testIsCompleted = isCompleted;
+        this.properties.setProperty("testIsCompleted",isCompleted.toString());
     }
 }
