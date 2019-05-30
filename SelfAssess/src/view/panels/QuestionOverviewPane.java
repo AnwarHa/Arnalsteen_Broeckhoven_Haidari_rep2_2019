@@ -29,8 +29,8 @@ public class QuestionOverviewPane extends GridPane {
 		
 		table = new TableView<>();
 		table.setPrefWidth(REMAINING);
-        TableColumn nameCol = new TableColumn<>("Question");
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("question"));
+        TableColumn nameCol = new TableColumn<>("Name");
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         table.getColumns().add(nameCol);
         TableColumn descriptionCol = new TableColumn<>("Category");
         descriptionCol.setCellValueFactory(new PropertyValueFactory("category"));
