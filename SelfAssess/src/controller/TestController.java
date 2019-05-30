@@ -40,12 +40,14 @@ public class TestController {
         test = new Test(this.databaseService.readQuestions());
         try {
             if (databaseService.testIsCompleted() == true) {
-                this.messagePane.getLabel().setText(databaseService.getLastTestScores());
+                this.messagePane.getLabel().setText(this.databaseService.getLastTestScores());
+            }
+            else{
+                this.messagePane.getLabel().setText("You never did this evaluation");
             }
         }catch (NullPointerException e){
-            this.messagePane.getLabel().setText("You never did this evaluation");
+            System.out.println("Geen test scores");
         }
-
     }
 
     class EvaluateTest implements EventHandler<ActionEvent> {
@@ -75,6 +77,7 @@ public class TestController {
                 stage.show();
             } catch (NullPointerException e) {
                 messagePane.getLabel().setText(test.printResults());
+
                 try {
                     databaseService.setTestIsCompleted(true);
                 } catch (IOException e1) {
