@@ -10,10 +10,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Category;
 import model.DomainException;
-import model.ListItem;
 import view.panels.CategoryDetailPane;
 import view.panels.CategoryOverviewPane;
-
 import java.util.List;
 
 public class CategoryController {

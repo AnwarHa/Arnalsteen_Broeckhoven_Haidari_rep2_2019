@@ -16,16 +16,13 @@ public class TxtDatabaseQuestion extends TxtDatabaseStrategy{
     public List<ListItem> load() {
         List<ListItem> out = new ArrayList<>();
         // This will reference one line at a time
-        String line = "";
+        String line;
 
         try {
             // FileReader reads text files in the default encoding.
-            FileReader fileReader =
-                    new FileReader(this.path);
-
+            FileReader fileReader = new FileReader(this.path);
             // Always wrap FileReader in BufferedReader.
-            BufferedReader bufferedReader =
-                    new BufferedReader(fileReader);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while((line = bufferedReader.readLine()) != null) {
                 List<String> stringList = new ArrayList<>();
@@ -38,12 +35,10 @@ public class TxtDatabaseQuestion extends TxtDatabaseStrategy{
             bufferedReader.close();
         }
         catch(FileNotFoundException ex) {
-            System.out.println(
-                    "Unable to open file: question.txt");
+            System.out.println("Unable to open file: question.txt");
         }
         catch(IOException ex) {
-            System.out.println(
-                    "Error reading file: question.txt");
+            System.out.println("Error reading file: question.txt");
             // Or we could just do this:
             // ex.printStackTrace();
         }
@@ -54,12 +49,10 @@ public class TxtDatabaseQuestion extends TxtDatabaseStrategy{
     public void update(List<ListItem> items) {
         try {
             // Assume default encoding.
-            FileWriter fileWriter =
-                    new FileWriter(this.path);
+            FileWriter fileWriter = new FileWriter(this.path);
 
             // Always wrap FileWriter in BufferedWriter.
-            BufferedWriter bufferedWriter =
-                    new BufferedWriter(fileWriter);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             items.addAll(this.load());
             // Note that write() does not automatically
             // append a newline character.
@@ -73,10 +66,7 @@ public class TxtDatabaseQuestion extends TxtDatabaseStrategy{
             bufferedWriter.close();
         }
         catch(IOException ex) {
-            System.out.println(
-                    "Error writing categories: " + ex.getMessage());
-            // Or we could just do this:
-            // ex.printStackTrace();
+            System.out.println("Error writing categories: " + ex.getMessage());
         }
     }
 }

@@ -1,13 +1,10 @@
 package database;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import model.ListItem;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class RamDatabaseStrategy implements DatabaseStrategy {
-    ObservableList<ListItem> items = FXCollections.observableArrayList(new ArrayList<>());
+    private List<ListItem> items = new ArrayList<>();
     public RamDatabaseStrategy() {
     }
 
