@@ -60,7 +60,7 @@ public class TxtDatabaseQuestion extends TxtDatabaseStrategy{
             // Always wrap FileWriter in BufferedWriter.
             BufferedWriter bufferedWriter =
                     new BufferedWriter(fileWriter);
-
+            items.addAll(this.load());
             // Note that write() does not automatically
             // append a newline character.
             for(ListItem l : items){
