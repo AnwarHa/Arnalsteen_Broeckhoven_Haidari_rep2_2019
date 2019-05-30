@@ -72,9 +72,6 @@ public class DatabaseService implements Subject {
 
     }
 
-/*
-    public void writeQuestions(List<Question> questions) {
-*/
     public void writeQuestions(List<Question> questions) {
         if (questions.isEmpty()) {
             throw new DatabaseException("can not set questions: list is empty");

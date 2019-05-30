@@ -21,7 +21,7 @@ public class Question implements Serializable,ListItem {
         setCategory(category);
         setFeedback(feedback);
         }catch(Exception e) {
-            throw new DomainException("can not create a new name: " + e.getMessage());
+            throw new DomainException("can not create a new question: " + e.getMessage());
         }
     }
 

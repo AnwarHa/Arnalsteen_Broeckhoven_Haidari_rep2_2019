@@ -1,1 +1,4 @@
-Vraag;Git;dom eh;JA;Nee
+eerste vraag;category1;feedback1;juiste antwoord;fout antwoord 1;fout antwoord 2
+tweede vraag;category2;feedback2;juiste antwoord;fout antwoord 1;fout antwoord 2
+derde vraag;category3;feedback3;juiste antwoord;fout antwoord 1;fout antwoord
+Moet ik eerst lezen of schrijven;Java;mag je ni doen ;ja, want ik ben dom;nee, das lomp

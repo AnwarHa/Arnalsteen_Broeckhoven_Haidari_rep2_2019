@@ -34,7 +34,7 @@ public class Main extends Application {
 
 			//hier moet de strategy in komen via de properties path
 			DatabaseService databaseService = new DatabaseService("TxtDatabase");
-			List<String> statementstest = new ArrayList<>();
+			/*List<String> statementstest = new ArrayList<>();
 			statementstest.add("juiste antwoord");
 			statementstest.add("fout antwoord 1");
 			statementstest.add("fout antwoord 2");
@@ -49,7 +49,7 @@ public class Main extends Application {
 			for(Question q : databaseService.readQuestions()){
 				System.out.println("vraag: "+ q.getName()+q.getCategory()+q.getStatements().size()+q.getFeedback());
 			}
-			System.out.println("catdesc length: "+databaseService.getCategoryDescriptions().size());
+			System.out.println("catdesc length: "+databaseService.getCategoryDescriptions().size());*/
 
 
 			QuestionOverviewPane questionOverviewPane = new QuestionOverviewPane();
