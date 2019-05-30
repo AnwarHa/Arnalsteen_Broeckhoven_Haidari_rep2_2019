@@ -24,6 +24,7 @@ public class TestController {
     private Stage stage;
     private DatabaseService databaseService;
     private Test test;
+    private boolean updated = false;
 
 
     public TestController(MessagePane messagePane) {
@@ -33,7 +34,8 @@ public class TestController {
 
     public void setDatabaseService(DatabaseService databaseService) {
         this.databaseService = databaseService;
-        test = new Test(databaseService.readQuestions());
+        test = new Test(this.databaseService.readQuestions());
+
     }
 
     class EvaluateTest implements EventHandler<ActionEvent> {
@@ -43,9 +45,11 @@ public class TestController {
             testPane = new TestPane();
             Scene scene = new Scene(testPane);
             stage.setScene(scene);
-
             testPane.setStatementGroup(new ToggleGroup());
-
+            if (updated == false) {
+                test.setQuestions(databaseService.readQuestions());
+                updated = true;
+            }
             try {
                 Question question = test.findNextQuestion();
 
