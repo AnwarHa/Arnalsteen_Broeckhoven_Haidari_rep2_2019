@@ -50,6 +50,9 @@ public class TestController {
                 test.setQuestions(databaseService.readQuestions());
                 updated = true;
             }
+            if (databaseService.testIsCompleted() == true) {
+                messagePane.getLabel().setText(databaseService.getLastTestScores());
+            }
             try {
                 Question question = test.findNextQuestion();
 
@@ -65,6 +68,8 @@ public class TestController {
                 stage.show();
             } catch (NullPointerException e) {
                 messagePane.getLabel().setText(test.printResults());
+                databaseService.setTestIsCompleted(true);
+                databaseService.setLastTestScores(test.printResults());
 
             }
         }
