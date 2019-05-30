@@ -7,10 +7,13 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.Question;
 import database.*;
 import view.panels.QuestionDetailPane;
 import view.panels.QuestionOverviewPane;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,6 +25,7 @@ public class QuestionController {
     private List<Question> questions;
     private ObservableList<String> answers;
     private ObservableList<String> teVerwijderen;
+    private boolean questionOpen = false;
 
 
     public QuestionController(QuestionOverviewPane questionOverviewPane) {
@@ -46,19 +50,25 @@ public class QuestionController {
     class OpenDetailPane implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            teVerwijderen = FXCollections.observableArrayList();
-            answers = FXCollections.observableArrayList();
-            stage = new Stage();
-            questionDetailPane = new QuestionDetailPane();
-            Scene scene = new Scene(questionDetailPane);
-            stage.setScene(scene);
-            questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
-            questionDetailPane.getBtnAdd().setOnAction(new AddStatementListener());
-            questionDetailPane.getBtnRemove().setOnAction(new RemoveStatementListener());
-            questionDetailPane.getBtnCancel().setOnAction(new CancelQuestion());
-            questionDetailPane.setSaveAction(new SaveQuestion());
-            stage.show();
+            if(questionOpen==false){
+                questionOpen = true;
+                teVerwijderen = FXCollections.observableArrayList();
+                answers = FXCollections.observableArrayList();
+                stage = new Stage();
+                questionDetailPane = new QuestionDetailPane();
+                Scene scene = new Scene(questionDetailPane);
+                stage.setScene(scene);
+                questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
+                questionDetailPane.getBtnAdd().setOnAction(new AddStatementListener());
+                questionDetailPane.getBtnRemove().setOnAction(new RemoveStatementListener());
+                questionDetailPane.getBtnCancel().setOnAction(new CancelQuestion());
+                questionDetailPane.setSaveAction(new SaveQuestion());
+                stage.initStyle(StageStyle.UNDECORATED);
+                stage.show();
+            }
+
         }
+
     }
 
 
@@ -92,6 +102,7 @@ public class QuestionController {
 
         @Override
         public void handle(ActionEvent event) {
+            questionOpen = false;
             stage.close();
         }
     }
@@ -107,8 +118,8 @@ public class QuestionController {
             questions.add(questionObject);
             databaseService.writeQuestions(questions);
             questionOverviewPane.getTable().getItems().addAll(questionObject);
+            questionOpen = false;
             stage.close();
-
         }
     }
 
@@ -116,32 +127,34 @@ public class QuestionController {
 
         @Override
         public void handle(MouseEvent event) {
-            stage = new Stage();
-            Question question = questionOverviewPane.getSelectedRow();
-            answers = FXCollections.observableArrayList();
-            answers.addAll(question.getStatements());
-            questionDetailPane = new QuestionDetailPane();
-            System.out.println(answers);
-            questionDetailPane.setQuestionField(question.getName());
-            questionDetailPane.setStatementsArea(answers);
-            questionDetailPane.setFeedbackField(question.getFeedback());
-            //questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
-            questionDetailPane.setCategoryField(question.getCategory());
-            Scene scene = new Scene(questionDetailPane);
-            stage.setScene(scene);
-            try {
+            if(questionOpen==false){
+                stage = new Stage();
+                Question question = questionOverviewPane.getSelectedRow();
+                answers = FXCollections.observableArrayList();
+                answers.addAll(question.getStatements());
+                questionDetailPane = new QuestionDetailPane();
+                questionDetailPane.setQuestionField(question.getName());
+                questionDetailPane.setStatementsArea(answers);
+                questionDetailPane.setFeedbackField(question.getFeedback());
+                questionDetailPane.setCategoryField(question.getCategory());
+                Scene scene = new Scene(questionDetailPane);
+                stage.setScene(scene);
+                try {
 
-                questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
-            } catch (NullPointerException e) {
-                e.fillInStackTrace();
-                System.out.println("No Category names yet");
+                    questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
+                } catch (NullPointerException e) {
+                    e.fillInStackTrace();
+                    System.out.println("No Category names yet");
+                }
+                stage.initStyle(StageStyle.UNDECORATED);
+                stage.show();
+
+                questionDetailPane.setSaveAction(new editQuestion(question));
+                questionDetailPane.getBtnAdd().setOnAction(new AddStatementEditListener(question));
+                questionDetailPane.getBtnRemove().setOnAction(new RemoveStatementEditListener(question));
+                questionDetailPane.getBtnCancel().setOnAction(new CancelQuestion());
             }
-            stage.show();
 
-            questionDetailPane.setSaveAction(new editQuestion(question));
-            questionDetailPane.getBtnAdd().setOnAction(new AddStatementEditListener(question));
-            questionDetailPane.getBtnRemove().setOnAction(new RemoveStatementEditListener(question));
-            questionDetailPane.getBtnCancel().setOnAction(new CancelQuestion());
 
         }
     }
@@ -156,20 +169,25 @@ public class QuestionController {
 
         @Override
         public void handle(ActionEvent event) {
-            //String correctAnswer = answers.get(0);
             String qu = questionDetailPane.getQuestionField().getText();
             String category = questionDetailPane.getCategoryField().getValue().toString();
             String feedback = questionDetailPane.getFeedbackField().getText();
-            System.out.println(qu);
-            System.out.println(category);
-            System.out.println(feedback);
-            //question.setCorrectAnswer(correctAnswer);
             ObservableList<String> statements = questionDetailPane.getStatementsArea().getItems();
             question.setQuestion(qu);
             question.setCategory(category);
             question.setFeedback(feedback);
             question.setStatements(statements);
-            questionOverviewPane.getTable().getItems().setAll(databaseService.readQuestions());
+
+            List<Question> updatedQuestions = new ArrayList<>();
+            for (Iterator it = questionOverviewPane.getTable().getItems().iterator(); it.hasNext(); ) {
+                Object q = it.next();
+                if(q instanceof Question){
+                    Question quest = (Question) q;
+                    updatedQuestions.add(quest);
+                }
+            }
+            databaseService.writeQuestions(updatedQuestions);
+            questionOpen=false;
             stage.close();
         }
     }
@@ -204,7 +222,6 @@ public class QuestionController {
                 answers = FXCollections.observableArrayList();
                 answers.addAll(question.getStatements());
             }
-            System.out.println(answers);
             Iterator<String> it = answers.iterator();
             teVerwijderen = questionDetailPane.getStatementsArea().getSelectionModel().getSelectedItems();
             while (it.hasNext()) {
@@ -215,7 +232,6 @@ public class QuestionController {
                 }
             }
             questionDetailPane.setStatementsArea(answers);
-            System.out.println(answers);
         }
     }
 }
