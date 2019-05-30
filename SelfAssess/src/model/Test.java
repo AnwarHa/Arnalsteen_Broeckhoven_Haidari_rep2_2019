@@ -4,18 +4,23 @@ import controller.Observer;
 
 import java.util.*;
 
-public class Test implements Observer {
+public class Test{
     private List<Question> questions;
     private List<Question> askedQuestions;
     private List<String> feedback;
     private Question currentQuestion;
     private HashMap<String, Integer> score;
+    private boolean testTaken = false;
 
     public Test(List<Question> questions) {
         setQuestions(questions);
         this.askedQuestions = new ArrayList<>();
         this.feedback = new ArrayList<>();
         score = new HashMap<>();
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
     }
 
     public void setQuestions(List<Question> questions) {
@@ -59,6 +64,7 @@ public class Test implements Observer {
         if (berekenScore() == askedQuestions.size()) {
             text = "Schitterend! Alles perfect!";
         }
+        testTaken = true;
         return text;
     }
 
@@ -86,10 +92,5 @@ public class Test implements Observer {
             }
         }
         return count;
-    }
-
-    @Override
-    public void update() {
-
     }
 }
