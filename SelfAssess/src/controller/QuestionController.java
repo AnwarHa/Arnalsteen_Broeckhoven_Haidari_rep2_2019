@@ -11,9 +11,6 @@ import model.Question;
 import database.*;
 import view.panels.QuestionDetailPane;
 import view.panels.QuestionOverviewPane;
-
-import javax.swing.*;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
