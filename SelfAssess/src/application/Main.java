@@ -33,7 +33,7 @@ public class Main extends Application {
 		try {
 
 			//hier moet de strategy in komen via de properties path
-			DatabaseService databaseService = new DatabaseService("TxtDatabase");
+			DatabaseService databaseService = new DatabaseService();
 			/*List<String> statementstest = new ArrayList<>();
 			statementstest.add("juiste antwoord");
 			statementstest.add("fout antwoord 1");
