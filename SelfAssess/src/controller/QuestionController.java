@@ -36,6 +36,12 @@ public class QuestionController {
 
     public void setDatabaseService(DatabaseService databaseService) {
         this.databaseService = databaseService;
+        try {
+            this.questionOverviewPane.getTable().getItems().setAll(this.databaseService.readQuestions());
+        } catch (NullPointerException e) {
+            e.fillInStackTrace();
+            System.out.println("No categories yet");
+        }
     }
 
     public List<String> getShuffledStatements(Question question) {

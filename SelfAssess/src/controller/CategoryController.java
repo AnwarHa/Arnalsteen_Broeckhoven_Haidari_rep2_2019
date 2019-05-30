@@ -28,18 +28,16 @@ public class CategoryController {
         this.categoryOverviewPane.setNewAction(new OpenDetailPane());
 
         this.categoryOverviewPane.setEditAction(new OpenDetailPaneEdit());
-        try {
-            categoryOverviewPane.getTable().getItems().addAll(databaseService.getCategoryDescriptions());
-        } catch (NullPointerException e) {
-            e.fillInStackTrace();
-            System.out.println("No categories yet");
-        }
-
-
     }
 
     public void setDatabaseService(DatabaseService databaseService) {
         this.databaseService = databaseService;
+        try {
+            this.categoryOverviewPane.getTable().getItems().addAll(this.databaseService.readCategories());
+        } catch (NullPointerException e) {
+            e.fillInStackTrace();
+            System.out.println("No categories yet");
+        }
     }
 
     class OpenDetailPane implements EventHandler<ActionEvent> {
