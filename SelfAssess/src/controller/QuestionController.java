@@ -10,6 +10,8 @@ import model.Question;
 import database.*;
 import view.panels.QuestionDetailPane;
 import view.panels.QuestionOverviewPane;
+
+import javax.swing.*;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -79,9 +81,49 @@ public class QuestionController {
         }
     }
 
+    class AddStatementEditListener implements EventHandler<ActionEvent>{
+        Question question;
+        AddStatementEditListener(Question q){
+            this.question = q;
+        }
+
+        @Override
+        public void handle(ActionEvent event){
+            if(answers==null){
+                answers.addAll(question.getStatements());
+            }
+            answers.add(questionDetailPane.getStatementField().getText());
+            questionDetailPane.getStatementsArea().setItems(answers);
+            questionDetailPane.getStatementField().clear();
+        }
+    }
+
     class RemoveStatementListener implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent e) {
+            Iterator<String> it = answers.iterator();
+            teVerwijderen = questionDetailPane.getStatementsArea().getSelectionModel().getSelectedItems();
+            while (it.hasNext()) {
+                String word = it.next();
+                if (word.equals(teVerwijderen.get(0))) {
+                    it.remove();
+                    break;
+                }
+            }
+        }
+    }
+
+    class RemoveStatementEditListener implements EventHandler<ActionEvent>{
+        Question question;
+        RemoveStatementEditListener(Question q){
+            this.question = q;
+        }
+        @Override
+        public void handle(ActionEvent event) {
+            if(answers==null){
+                answers.addAll(question.getStatements());
+            }
+            System.out.println(answers);
             Iterator<String> it = answers.iterator();
             teVerwijderen = questionDetailPane.getStatementsArea().getSelectionModel().getSelectedItems();
             while (it.hasNext()) {
@@ -128,7 +170,7 @@ public class QuestionController {
                 questionDetailPane.setQuestionField(question.getName());
                 questionDetailPane.setStatementsArea(question.getStatements());
                 questionDetailPane.setFeedbackField(question.getFeedback());
-                questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
+                //questionDetailPane.getCategoryField().getItems().addAll(databaseService.getCategoryNamesWithoutDuplicates());
                 questionDetailPane.setCategoryField(question.getCategory());
                 Scene scene = new Scene(questionDetailPane);
                 stage.setScene(scene);
@@ -141,8 +183,8 @@ public class QuestionController {
                 stage.show();
 
                 questionDetailPane.setSaveAction(new editQuestion(question));
-                questionDetailPane.getBtnAdd().setOnAction(new AddStatementListener());
-                questionDetailPane.getBtnRemove().setOnAction(new RemoveStatementListener());
+                questionDetailPane.getBtnAdd().setOnAction(new AddStatementEditListener(question));
+                questionDetailPane.getBtnRemove().setOnAction(new RemoveStatementEditListener(question));
                 questionDetailPane.getBtnCancel().setOnAction(new CancelQuestion());
 
             }
