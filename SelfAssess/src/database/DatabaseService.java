@@ -182,7 +182,7 @@ public class DatabaseService implements Subject {
     }
 
     public String getLastTestScores(){
-        propertiesDatabase.setLastTestScores(scores);
+       return propertiesDatabase.getLastTestScores();
     }
 }
 
