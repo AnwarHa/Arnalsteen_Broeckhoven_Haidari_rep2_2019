@@ -133,6 +133,8 @@ public class QuestionController {
                     break;
                 }
             }
+            questionDetailPane.setStatementsArea(answers);
+            System.out.println(answers);
         }
     }
 
